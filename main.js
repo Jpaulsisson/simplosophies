@@ -14,7 +14,7 @@ const selectRandom = (array) => {
 return array[i];}
 
 const generatePositiveMessage = () => {         //WILL ADD MORE PHRASE POSSIBILITIES LATER
-    let message = '';                           //WILL ALSO ADD IF STATEMENT TO MAKE SURE CORRECT GRAMMAR IS USED
+    let message = '';                           //WILL ALSO ADD TERNARY STATEMENT TO MAKE SURE CORRECT GRAMMAR IS USED
     const a = selectRandom(start);
     const b = selectRandom(second);
     const c = selectRandom(third);
