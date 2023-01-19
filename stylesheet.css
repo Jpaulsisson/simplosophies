@@ -1,6 +1,30 @@
 * {
-  background-color: #303131;
-  color: rgb(166, 198, 198);
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 8rem;
+  display: flex;
+  border: 2px solid green;
+  margin: 0;
+  padding: 0;
+}
+
+.first-h1 {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.second-h1 {
+  display: flex;                /*this is not intended to be styled this way, it's just a place holder for the idea*/
+  justify-content: center;
+  color:aliceblue
+}
+
+.third-h1 {
+  display: flex;
+  justify-content: flex-end;
 }
 body {
   background-color: #303131;
