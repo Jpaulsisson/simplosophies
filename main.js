@@ -19,7 +19,7 @@ const generatePositiveMessage = () => {         //WILL ADD MORE PHRASE POSSIBILI
     const b = selectRandom(second);
     const c = selectRandom(third);
     const d = fourth;
-    const e = a;
+    const e = a === 'I' ? 'I' : 'we';
     const f = selectRandom(sixth);
     const g = selectRandom(end);
     message = `${a} ${b} ${c} ${d} ${e} ${f} ${g}!`;
