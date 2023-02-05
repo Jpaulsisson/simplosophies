@@ -1,31 +1,43 @@
-* {
+*,
+*::after,
+*::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h2 {
+  display: flex;
+  width: 100vw;
   margin: 0;
   padding: 0;
 }
 
-h1 {
-  font-size: 8rem;
-  display: flex;
-  border: 2px solid green;
-  margin: 0;
-  padding: 0;
-}
-
-.first-h1 {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.second-h1 {
+.first-h2 {
   display: flex;                /*this is not intended to be styled this way, it's just a place holder for the idea*/
   justify-content: center;
-  color:aliceblue
+  color:#0f8181;
+  background-color: rgb(168, 240, 255, 0.5);
+  letter-spacing: .7em;
 }
 
-.third-h1 {
+.first-h2::before {
   display: flex;
-  justify-content: flex-end;
+  content: 'simple';
+  color: rgb(168, 240, 255, 0.5);
+  background-color: #0f8181;
+  width: 20vw;
+  justify-content: end;
 }
+
+.first-h2::after {
+  display:flex;
+  content: 'philosophies';
+  color: rgb(168, 240, 255, 0.5);
+  background-color: #0f8181;
+  width: 20vw;
+  justify-content: start;
+}
+
 body {
-  background-color: #303131;
+  background-color: #313131;
 }
