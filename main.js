@@ -1,4 +1,12 @@
- /* A POSITIVE MESSAGE GENERATOR */
+/* VARIABLE BANK */
+const popOutNav = document.getElementById('pop-out-nav');
+
+
+
+
+
+
+/* A POSITIVE MESSAGE GENERATOR */
 
 
 const start = ['I', 'We'];
@@ -27,3 +35,6 @@ const generatePositiveMessage = () => {         //WILL ADD MORE PHRASE POSSIBILI
 };
 generatePositiveMessage();
 
+function popOut() {
+    
+}
