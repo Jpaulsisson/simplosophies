@@ -25,12 +25,16 @@ nav h1 {
   font-size: 4.5rem; 
 }
 
-.hamburger {
+#hamburger {
   border: 8px solid #0f8181;
   border-radius: 25vw;
   background: #111;
   margin: 10px;
   width: 5vw;
+}
+
+#hamburger .active {
+  border:rgb(120, 221, 196) solid 10px;
 }
 
 .burger-span {

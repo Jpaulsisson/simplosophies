@@ -1,6 +1,7 @@
 /* VARIABLE BANK */
 const popOutNav = document.getElementById('pop-out-nav');
-
+const hamburger = document.getElementById('hamburger');
+const burgerSpan = document.getElementsByClassName('burger-span');
 
 
 
@@ -36,5 +37,7 @@ const generatePositiveMessage = () => {         //WILL ADD MORE PHRASE POSSIBILI
 generatePositiveMessage();
 
 function popOut() {
-    
+    burgerSpan.classList.add('active');
 }
+
+hamburger.onclick = popOut();
