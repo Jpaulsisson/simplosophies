@@ -4,7 +4,7 @@ const hamburger = document.getElementById('hamburger');
 const burgerSpan = document.getElementsByClassName('burger-span');
 
 
-
+// const burger = document.getElementsByName("burger-span");
 
 
 /* A POSITIVE MESSAGE GENERATOR */
@@ -37,7 +37,7 @@ const generatePositiveMessage = () => {         //WILL ADD MORE PHRASE POSSIBILI
 generatePositiveMessage();
 
 function popOut() {
-    burgerSpan.classList.add('active');
+    hamburger.classList.add('active');
 }
 
 hamburger.onclick = popOut();

@@ -33,9 +33,13 @@ nav h1 {
   width: 5vw;
 }
 
-#hamburger .active {
+#hamburger:hover {
   border:rgb(120, 221, 196) solid 10px;
 }
+
+/* #hamburger .active {
+  border:yellow solid 10px;
+} */
 
 .burger-span {
   color:rgb(120, 221, 196);
