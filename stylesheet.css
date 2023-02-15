@@ -11,7 +11,7 @@
 
 nav {
   display: grid;
-  grid-template-columns: 4fr 1fr 3fr;
+  grid-template-columns: repeat(5, 20%);
   grid-template-rows: 1fr;
   background: linear-gradient(120deg,white,rgb(246, 223, 91), rgb(251, 193, 86), rgb(201, 133, 133), pink, antiquewhite);
   border-top: 15px solid rgb(6, 111, 163);
@@ -22,39 +22,30 @@ nav {
 }
 
 nav h1 {
-  font-size: 4.5rem; 
+  font-size: 5rem; 
 }
 
-#hamburger {
-  border: 8px solid #0f8181;
-  border-radius: 25vw;
-  background: #111;
-  margin: 10px;
-  width: 5vw;
-}
-
-#hamburger:hover {
-  border:rgb(120, 221, 196) solid 10px;
-}
-
-/* #hamburger .active {
-  border:yellow solid 10px;
-} */
-
-.burger-span {
-  color:rgb(120, 221, 196);
-  background-color: aquamarine;
-  width: 10px;
-  height: 10px;
-}
-
-nav h1 span {
+.simple {
   color:rgb(255, 255, 255);
   -webkit-text-stroke: 0.75px rgb(0, 0, 0);
 }
 
-nav ul {
+.period {
   color:rgb(120, 221, 196);
+  -webkit-text-stroke: 0.75px rgb(0, 0, 0);
+  grid-column-start: 3;
+}
+
+.hamburger {
+  border: #0f8181 solid 1rem;
+  background-color: #111;
+  grid-column-start: 5;
+  width: 50%;
+}
+
+.menu {
+  color:rgb(120, 221, 196);
+  grid-column-start: -1;
 }
 
 h2 {

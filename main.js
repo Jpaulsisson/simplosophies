@@ -2,7 +2,7 @@
 const popOutNav = document.getElementById('pop-out-nav');
 const hamburger = document.getElementById('hamburger');
 const burgerSpan = document.getElementsByClassName('burger-span');
-
+const menu = document.querySelector(".menu");
 
 // const burger = document.getElementsByName("burger-span");
 
@@ -37,7 +37,5 @@ const generatePositiveMessage = () => {         //WILL ADD MORE PHRASE POSSIBILI
 generatePositiveMessage();
 
 function popOut() {
-    hamburger.classList.add('active');
-}
-
-hamburger.onclick = popOut();
+    menu.style.gridColumnStart = -2;
+};
