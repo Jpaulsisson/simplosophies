@@ -39,3 +39,5 @@ generatePositiveMessage();
 function popOut() {
     menu.style.gridColumnStart = -2;
 };
+
+hamburger.onclick = popOut();
