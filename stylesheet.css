@@ -19,6 +19,7 @@ nav {
   border-left: 15px solid rgb(17, 74, 103);
   border-right: 15px solid rgb(17, 74, 103);
   width: 100%;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }
 
 nav h1 {
@@ -28,6 +29,7 @@ nav h1 {
 .simple {
   color:rgb(255, 255, 255);
   -webkit-text-stroke: 0.75px rgb(0, 0, 0);
+  /* clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); */
 }
 
 .period {
