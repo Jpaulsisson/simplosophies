@@ -7,80 +7,42 @@
   box-sizing: border-box;
   color:azure;
   font-family: 'Comfortaa', cursive;
-}
-
-nav {
-  display: grid;
-  grid-template-columns: repeat(5, 20vw);
-  grid-template-rows: 1fr;
-  background: linear-gradient(120deg,white,rgb(246, 223, 91), rgb(251, 193, 86), rgb(201, 133, 133), pink, antiquewhite);
-  border-top: 15px solid rgb(6, 111, 163);
-  border-bottom: 25px solid #134;
-  border-left: 15px solid rgb(17, 74, 103);
-  border-right: 15px solid rgb(17, 74, 103);
-  width: 100%;
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-}
-
-nav h1 {
-  font-size: 2rem; 
-}
-
-.simple {
-  color:rgb(255, 255, 255);
-  -webkit-text-stroke: 0.75px rgb(0, 0, 0);
-  /* clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); */
-}
-
-.period {
-  color:rgb(120, 221, 196);
-  -webkit-text-stroke: 0.75px rgb(0, 0, 0);
-}
-
-.hamburger {
-  border: #0f8181 solid 1rem;
-  background-color: #111;
-  grid-column: 5 / span 1;
-}
-
-.menu {
-  color:rgb(120, 221, 196);
-  grid-column: 6 / span 2;
-}
-
-h2 {
-  display: flex;
-  width: 100vw;
-  margin: 0;
   padding: 0;
 }
 
-.first-h2 {
-  display: flex;                /*this is not intended to be styled this way, it's just a place holder for the idea*/
-  justify-content: center;
-  color:#0f8181;
-  background-color: rgb(168, 240, 255, 0.5);
-  letter-spacing: .7em;
-}
-
-.first-h2::before {
-  display: flex;
-  content: 'simple';
-  color: rgb(168, 240, 255, 0.5);
-  background-color: #0f8181;
-  width: 20vw;
-  justify-content: end;
-}
-
-.first-h2::after {
-  display:flex;
-  content: 'philosophies';
-  color: rgb(168, 240, 255, 0.5);
-  background-color: #0f8181;
-  width: 20vw;
-  justify-content: start;
-}
-
 body {
-  background-color: #111;
+  background-color: rgb(6, 22, 32);
 }
+
+.navbar {
+  background: linear-gradient(45deg,rgb(6, 22, 32) 0.3%, 14.5%, rgb(9, 32, 46) 14.5% 28.7%,  rgb(14, 44, 63) 28.7% 42.9%, rgb(31, 75, 102) 42.9% 57.1%,rgb(213, 213, 213) 57.1% 71.3%, rgb(214, 214, 214) 71.3% 85.5%, rgb(217, 217, 217) 85.5% 99.7%, rgb(218, 218, 218) 99.7%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid silver;
+  border-bottom-left-radius: 25px;
+  margin-bottom: 2rem;
+}
+
+.simple, .period {
+  font-size: 3.25rem;
+  order: 1;
+}
+
+.menu ul {
+  order: 2;
+}
+
+.menu-tgl {
+  order: 3;
+}
+
+.menu-btn {
+  border: 3px solid green;
+}
+
+.menu-img {
+  width: calc(20px + 7vw);
+  height: calc(30px + 11vh);
+}
+
