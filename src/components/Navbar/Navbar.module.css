@@ -1,0 +1,11 @@
+.logo {
+  /* font-size: 72px; */
+  font-size: 44px; 
+  color: hsl(170, 60%, 35%);
+}
+
+.logoSpan {
+  /* font-size: 60px; */
+  font-size: 36px;
+  color: hsl(159, 60%, 15%)
+}
