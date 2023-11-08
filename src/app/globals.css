@@ -1,3 +1,10 @@
+:root {
+  --bgColor: hsl(255, 10%, 3%); 
+  --primaryAccent: hsl(170, 60%, 35%);
+  --darkAccent: hsl(159, 60%, 15%);
+  --primaryFont: hsl(0, 6%, 93%);
+}
+
 *,
 *::before,
 *::after {
@@ -9,6 +16,13 @@
 
 html {
   padding: 20px;
-  background-color: hsl(255, 10%, 3%);
-  color: whitesmoke;
+  background-color: var(--bgColor);
+  color: var(--primaryFont);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  font-style: italic;
 }
