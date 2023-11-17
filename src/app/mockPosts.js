@@ -13,6 +13,7 @@ const mockPosts = [
     id: 2,
     image: '#',
     title: 'Control Your Perspective, Control Your Life',
-    body: ``
+    body: ``,
+    simplosophy: `You decide how you feel about things. Don't ever think you have no control.`
   }
 ]
