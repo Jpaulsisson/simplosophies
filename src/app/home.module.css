@@ -1,0 +1,18 @@
+.container {
+  margin-top: 36px;
+  width: 100%;
+}
+
+.welcome {
+  font-size: clamp(20px, 1.75vw, 24px);
+  font-weight: 700;
+  text-align: end;
+  color: var(--primaryFont);
+}
+
+.subwelcome {
+  margin-top: 10px;
+  font-size: clamp(14px, 1vw, 16px);
+  font-weight: 300;
+  text-align: end;
+}

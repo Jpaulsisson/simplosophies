@@ -1,10 +1,25 @@
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .logo {
-  font-size: clamp(2.25rem, 4vw, 5rem); 
-  color: hsl(170, 60%, 35%);
   text-decoration: none;
+}
+
+.logoText {
+  font-size: clamp(2.25rem, 5vw, 5rem);
+  color: hsl(170, 60%, 35%);
+  width: 100%;
+  text-align: end;
 }
 
 .logoSpan {
   font-size: clamp(2rem, 3.5vw, 4rem);
   color: hsl(159, 60%, 15%)
+}
+
+.loginBtn {
+  all: unset;
 }

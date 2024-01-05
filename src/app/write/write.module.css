@@ -1,0 +1,22 @@
+.passwordContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.passwordLabel {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.passwordInput {
+  all: unset;
+  padding: 8px;
+  color: var(--primaryFont);
+  background-color: var(--darkAccent);
+  border: 2px solid var(--primaryAccent);
+  border-radius: 25px 100px 55px 50px;
+  font-size: 20px;
+  font-weight: 700;
+}

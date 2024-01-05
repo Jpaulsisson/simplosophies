@@ -1,5 +1,5 @@
 :root {
-  --bgColor: hsl(255, 10%, 3%); 
+  --bgColor: hsl(255, 10%, 3%);
   --primaryAccent: hsl(170, 60%, 35%);
   --darkAccent: hsl(159, 60%, 15%);
   --primaryFont: hsl(0, 6%, 93%);
@@ -18,6 +18,14 @@ html {
   padding: 20px;
   background-color: var(--bgColor);
   color: var(--primaryFont);
+}
+
+body {
+  margin-inline: auto;
+  max-width: 950px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 img {
