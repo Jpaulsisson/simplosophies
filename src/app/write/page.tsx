@@ -14,11 +14,13 @@ function Write() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       {password === process.env.NEXT_PUBLIC_PAUL_PASSWORD ?
         <>
-          <h2>Hi Paul</h2>
-          <p>Let&apos;s write down some thoughts.</p>
+          <div className={styles.welcomeContainer}>
+            <h2 className={styles.header}>Hi Paul</h2>
+            <p className={styles.subheader}>Let&apos;s write down some thoughts.</p>
+          </div>
         </>
         :
         <div className={styles.passwordContainer}>
