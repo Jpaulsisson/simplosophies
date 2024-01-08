@@ -2,20 +2,20 @@ import { AuthOptions } from "next-auth";
 import Github from "next-auth/providers/github";
 import NextAuth from "next-auth/next";
 
-
-
+const GithubID = process.env.GITHUB_AUTH_ID as string;
+const GithubSecret = process.env.GITHUB_AUTH_SECRET as string;
 
 const authOptions: AuthOptions = {
   providers: [
     Github({
-      clientId: '7d518a1e044636b2b404',
-      clientSecret: 'ddbfa22746b19a86d286e9c66256f22ff6b5d9a1',
+      clientId: GithubID,
+      clientSecret: GithubSecret,
     }),
   ],
   callbacks: {
     async session({ session, token }: any) {
       session.user.name = `${session?.user?.name}_${token?.sub}`
-      console.log(session, token)
+      // console.log(session, token)
 
       return session
     }

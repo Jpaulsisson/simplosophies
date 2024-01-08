@@ -15,7 +15,7 @@ function Write() {
 
   return (
     <div>
-      {password === process.env.ADMIN_PASSWORD ?
+      {password === process.env.NEXT_PUBLIC_PAUL_PASSWORD ?
         <>
           <h2>Hi Paul</h2>
           <p>Let&apos;s write down some thoughts.</p>
