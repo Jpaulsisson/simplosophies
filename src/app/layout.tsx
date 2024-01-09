@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 const font = Urbanist({
   weight: ['100', '300', '400', '700'],
   subsets: ['latin'],
+  style: ['italic', 'normal']
 })
 
 
