@@ -1,12 +1,55 @@
 'use client';
 
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
 import { useState } from 'react';
 import styles from './write.module.css';
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '@/utils';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { error } from 'console';
+import { GlobalContext } from '@/context';
+
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app, 'gs://simplosophies.appspot.com');
+
+function createUniqueFileName(fileName: string) {
+  const timestamp = Date.now();
+  const randomString = Math.random().toString(36).substring(2, 12);
+
+  return `${fileName}-${timestamp}-${randomString}`
+}
+
+async function handleSaveImageToFirebase(file: any) {
+  const getUniqueFileName = createUniqueFileName(file?.name);
+  const storageRef = ref(storage, `blog/${getUniqueFileName}`);
+  const uploadImage = uploadBytesResumable(storageRef, file);
+
+  return new Promise((res, rej) => {
+    uploadImage.on('state_changed', (snapshot) => { }, (error) => rej(error), () => {
+      getDownloadURL(uploadImage.snapshot.ref).then(url => res(url)).catch(error => rej(error))
+    })
+  })
+}
+
 
 function Write() {
-
+  const { blogData, setBlogData } = useContext(GlobalContext)
   const [password, setPassword] = useState('');
+  const [imageLoading, setImageLoading] = useState(false);
+
+  async function handleChangeImage(event: React.ChangeEvent<HTMLInputElement>) {
+    if (!event.target.files) return;
+    setImageLoading(true);
+    const saveImageToFirebase: any = await handleSaveImageToFirebase(event.target.files[0])
+
+    if (saveImageToFirebase !== '') {
+      setImageLoading(false);
+      setBlogData({
+        ...blogData,
+        image: saveImageToFirebase,
+      })
+    }
+  }
 
   function handlePasswordChange(e: ChangeEvent<HTMLInputElement>) {
     const target = e.target.value
@@ -28,7 +71,7 @@ function Write() {
             </div>
             <div className={styles.postImageContainer}>
               <label className={styles.postImageLabel} htmlFor='postImage'>Choose a post image</label>
-              <input className={styles.postImageInput} type="file" max={1000000} accept='image/*' name="postImage" id="postImage" />
+              <input className={styles.postImageInput} onChange={handleChangeImage} type="file" max={1000000} accept='image/*' name="postImage" id="postImage" />
             </div>
           </div>
         </>
