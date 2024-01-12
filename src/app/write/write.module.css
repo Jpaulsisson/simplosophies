@@ -4,8 +4,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(hsl(0, 0%, 0%), rgb(56, 56, 56));
-  border-radius: 0 0 10% 10%;
 }
 
 .passwordContainer {
@@ -35,11 +33,13 @@
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .header {
-  font-size: 48px;
+  font-size: 20px;
   font-weight: 100;
+  font-style: italic;
 }
 
 .subheader {
@@ -47,49 +47,100 @@
 }
 
 .writingContainer {
-  width: 85%;
-  margin-inline: auto;
-}
-
-.titleContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.titleLabel {
-  width: min-content;
-  background: linear-gradient(90deg, var(--primaryAccent), var(--darkAccent));
-  font-size: 20px;
-  padding: 5px 50px;
-  border-radius: 10px 15px;
+  width: 100%;
+  display: grid;
+  gap: 20px;
 }
 
 .titleInput {
-  font-size: 28px;
-  padding: 5px;
-  border: none;
+  font-size: 20px;
+  padding: 10px;
+  border: 1px solid white;
   border-radius: 5px;
+  font-weight: 100;
+  background: linear-gradient(90deg, var(--primaryAccent), var(--darkAccent));
+  color: var(--primaryFont);
+}
+
+.titleInput::placeholder {
+  font-size: 16px;
+  font-weight: 100;
+  font-style: italic;
+  color: var(--primaryFont);
 }
 
 .postImageContainer {
-  margin-top: 16px;
   display: flex;
-  flex-direction: column;
   gap: 12px;
+}
+
+.spinnerAndLabelWrapper {
+  display: flex;
+  align-items: center;
 }
 
 .postImageLabel {
   width: fit-content;
   background: linear-gradient(90deg, var(--primaryAccent), var(--darkAccent));
-  font-size: 20px;
+  font-size: 14px;
   padding: 5px 50px;
   border-radius: 10px 15px;
 }
 
 .postImageInput {
-  font-size: 20px;
+  font-size: 12px;
   padding: 5px;
   border: none;
   border-radius: 5px;
+}
+
+.articleInput {
+  min-height: 40vh;
+  font-size: 14px;
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-style: italic;
+  font-weight: 100;
+  background: linear-gradient(90deg, var(--primaryAccent), var(--darkAccent));
+  color: var(--primaryFont);
+  resize: none;
+}
+
+.articleInput::placeholder {
+  color: var(--primaryFont);
+}
+
+.footnoteInput {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-weight: 100;
+  background: linear-gradient(90deg, var(--primaryAccent), var(--darkAccent));
+  color: var(--primaryFont);
+}
+
+.footnoteInput::placeholder {
+  font-size: 14px;
+  font-weight: 100;
+  font-style: italic;
+  color: var(--primaryFont);
+}
+
+.categoryInput {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-weight: 100;
+  background: linear-gradient(90deg, var(--primaryAccent), var(--darkAccent));
+  color: var(--primaryFont);
+}
+
+.categoryInput::placeholder {
+  font-size: 14px;
+  font-weight: 100;
+  font-style: italic;
+  color: var(--primaryFont);
 }

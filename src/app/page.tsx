@@ -10,9 +10,9 @@ export default function Home() {
 
   return (
     <main className={styles.container}>
-      <section>
+      <section className={styles.welcomeContainer}>
         <h2 className={styles.welcome}>Hey there, welcome to Simplosophies.</h2>
-        <p className={styles.subwelcome}>where I deep dive into my everyday thoughts and ask for your thoughts about them.</p>
+        <p className={styles.subwelcome}>it&apos;s basically my own personal LiveJournal.</p>
       </section>
       <section className={styles.recentPostsContainer}>
 
