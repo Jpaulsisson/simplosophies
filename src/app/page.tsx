@@ -12,7 +12,7 @@ export default function Home() {
     <main className={styles.container}>
       <section className={styles.welcomeContainer}>
         <h2 className={styles.welcome}>Hey there, welcome to Simplosophies.</h2>
-        <p className={styles.subwelcome}>it&apos;s basically my own personal LiveJournal.</p>
+        <p className={styles.subwelcome}>...it&apos;s basically my own personal LiveJournal.</p>
       </section>
       <section className={styles.recentPostsContainer}>
 

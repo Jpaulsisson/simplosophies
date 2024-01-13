@@ -144,3 +144,13 @@
   font-style: italic;
   color: var(--primaryFont);
 }
+
+.submitButton {
+  padding: 10px;
+  border: 1px solid var(--primaryAccent);
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primaryFont);
+  background-color: var(--bgColor);
+}

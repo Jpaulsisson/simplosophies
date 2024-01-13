@@ -61,6 +61,11 @@ function Write() {
     })
   }
 
+  function handleSubmit(formData) {
+    console.log(formData);
+    return formData
+  }
+
   async function handleChangeImage(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return;
     setImageLoading(true);
@@ -104,6 +109,7 @@ function Write() {
             <textarea onChange={(e) => setBlogData({ ...blogData, article: e.target.value })} placeholder='thoughts...' className={styles.articleInput} />
             <input className={styles.footnoteInput} type='text' onChange={handleFootnoteChange} value={blogData.footnote} placeholder='TLDR...' />
             <input className={styles.categoryInput} type='text' placeholder='comma-separated tags...' onChange={handleTagsChange} value={blogData.category} />
+            <button className={styles.submitButton} onClick={() => handleSubmit(blogData)}>Add Blog</button>
           </div>
         </>
         :
