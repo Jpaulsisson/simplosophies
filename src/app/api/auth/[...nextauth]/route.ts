@@ -1,5 +1,6 @@
 import { AuthOptions } from "next-auth";
 import Github from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
 import NextAuth from "next-auth/next";
 
 const GithubID = process.env.GITHUB_AUTH_ID as string;
@@ -11,6 +12,7 @@ const authOptions: AuthOptions = {
       clientId: GithubID,
       clientSecret: GithubSecret,
     }),
+    // add google provider setup
   ],
   callbacks: {
     async session({ session, token }: any) {

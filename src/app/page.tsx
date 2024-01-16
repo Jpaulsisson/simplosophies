@@ -21,6 +21,7 @@ export default function Home() {
         <p className={styles.subwelcome}>...it&apos;s basically my own personal LiveJournal.</p>
       </section>
       <section className={styles.recentPostsContainer}>
+        {/* get blog data stored in PostgreSQL and pull it */}
         {recents.length > 0 ?
           recents.map((blog) => (
             <div key={blog.id}>
