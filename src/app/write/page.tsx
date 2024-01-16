@@ -8,6 +8,7 @@ import { firebaseConfig } from '@/utils';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { GlobalContext } from '@/context';
 import Spinner from '@/components/Spinner';
+import { NewBlogData } from '@/utils/types';
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app, 'gs://simplosophies.appspot.com');
@@ -61,7 +62,7 @@ function Write() {
     })
   }
 
-  function handleSubmit(formData) {
+  function handleSubmit(formData: NewBlogData) {
     console.log(formData);
     return formData
   }
