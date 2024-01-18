@@ -9,6 +9,7 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/
 import { GlobalContext } from '@/context';
 import Spinner from '@/components/Spinner';
 import { NewBlogData } from '@/utils/types';
+import { useSession } from 'next-auth/react';
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app, 'gs://simplosophies.appspot.com');
@@ -35,6 +36,7 @@ async function handleSaveImageToFirebase(file: any) {
 
 function Write() {
   const { blogData, setBlogData } = useContext(GlobalContext)
+  const { data: session } = useSession();
   const [password, setPassword] = useState('');
   const [imageLoading, setImageLoading] = useState(false);
 
@@ -62,9 +64,17 @@ function Write() {
     })
   }
 
-  function handleSubmit(formData: NewBlogData) {
-    console.log(formData);
-    return formData
+  async function handleSubmit(formData: NewBlogData) {
+    const newPost = await fetch('/api/posts/createPost', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...formData,
+        userId: session?.user?.name,
+      })
+    })
+
+    console.log(newPost)
   }
 
   async function handleChangeImage(event: React.ChangeEvent<HTMLInputElement>) {

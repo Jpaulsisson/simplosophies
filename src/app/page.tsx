@@ -10,9 +10,17 @@ export default function Home() {
   const [recents, setRecents] = useState([]);
   const router = useRouter();
 
+  async function handleGetPosts() {
+    const res = await fetch('/api/posts/getAllPosts')
+    const posts = await res.json();
+    console.log(posts.data);
+  }
+
   useEffect(() => {
     // populate recents
-  })
+    const posts = handleGetPosts();
+    console.log(posts);
+  }, [])
 
   return (
     <main className={styles.container}>
@@ -22,13 +30,13 @@ export default function Home() {
       </section>
       <section className={styles.recentPostsContainer}>
         {/* get blog data stored in PostgreSQL and pull it */}
-        {recents.length > 0 ?
+        {/* {recents.length > 0 ?
           recents.map((blog) => (
             <div key={blog.id}>
               <h2>{blog.title}</h2>
             </div>
           ))
-          : null}
+          : null} */}
       </section>
     </main>
   )

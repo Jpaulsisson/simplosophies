@@ -154,3 +154,7 @@
   color: var(--primaryFont);
   background-color: var(--bgColor);
 }
+
+.submitButton:active {
+  filter: brightness(50%);
+}
