@@ -4,22 +4,36 @@ import Spinner from "@/components/Spinner";
 import styles from './home.module.css';
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+
+type Blog = {
+  postId: string;
+  title: string;
+  createdAt: Date;
+  article: string;
+  image: string;
+  footnote: string;
+  category: string;
+  userId: string;
+}
 
 export default function Home() {
 
-  const [recents, setRecents] = useState([]);
-  const router = useRouter();
+  const [recents, setRecents] = useState<Blog[]>([]);
 
   async function handleGetPosts() {
-    const res = await fetch('/api/posts/getAllPosts')
+    const res = await fetch('/api/posts/getSixPosts')
     const posts = await res.json();
-    console.log(posts.data);
+    return posts.data;
   }
 
   useEffect(() => {
-    // populate recents
-    const posts = handleGetPosts();
-    console.log(posts);
+    async function getPosts() {
+      const posts = await handleGetPosts();
+      setRecents(posts);
+    }
+    getPosts();
   }, [])
 
   return (
@@ -29,14 +43,15 @@ export default function Home() {
         <p className={styles.subwelcome}>...it&apos;s basically my own personal LiveJournal.</p>
       </section>
       <section className={styles.recentPostsContainer}>
-        {/* get blog data stored in PostgreSQL and pull it */}
-        {/* {recents.length > 0 ?
+        <h2 className={styles.recentHeader}>Recent Posts</h2>
+        {recents.length > 0 ?
           recents.map((blog) => (
-            <div key={blog.id}>
-              <h2>{blog.title}</h2>
-            </div>
+            <Link href={`/blog/${blog.postId}`} className={styles.blogCard} key={blog.postId}>
+              <h2 className={styles.blogTitle}>{blog.title}</h2>
+              <Image className={styles.blogImage} src={blog.image} alt={blog.title} width={150} height={120} />
+            </Link>
           ))
-          : null} */}
+          : null}
       </section>
     </main>
   )
