@@ -1,22 +1,22 @@
 'use client'
 
-import { initialNewBlogData } from "@/utils";
-import { NewBlogData } from "@/utils/types";
+import { initialBlogContent } from "@/utils";
+import { BlogContent } from "@/utils/types";
 import { useSession } from "next-auth/react";
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 
 type ContextType = {
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  blogData: NewBlogData;
-  setBlogData: Dispatch<SetStateAction<NewBlogData>>;
+  blogData: BlogContent;
+  setBlogData: Dispatch<SetStateAction<BlogContent>>;
   username: string;
 }
 
 const initialState = {
   loading: false,
   setLoading: () => { },
-  blogData: initialNewBlogData,
+  blogData: initialBlogContent,
   setBlogData: () => { },
   username: '',
 }
@@ -25,7 +25,7 @@ export const GlobalContext = createContext<ContextType>(initialState)
 
 export default function GlobalState({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(false);
-  const [blogData, setBlogData] = useState(initialNewBlogData);
+  const [blogData, setBlogData] = useState(initialBlogContent);
   const [username, setUsername] = useState('');
   const { data: session } = useSession();
 

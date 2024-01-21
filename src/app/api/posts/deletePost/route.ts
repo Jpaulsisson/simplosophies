@@ -1,13 +1,25 @@
+import prisma from '@/database';
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function DELETE(request: NextRequest) {
   try {
 
     const url = new URL(request.url);
-    const itemToDelete = url.searchParams.get('postId')
+    const blogId = url.searchParams.get('postId');
+
+    const post = await prisma.posts.delete({
+      where: {
+        postId: blogId as string
+      }
+    })
+
+    return NextResponse.json({
+      data: post,
+      success: true,
+      message: 'Blog data pulled.'
+    })
 
   } catch (error) {
-    console.log(error);
 
     return NextResponse.json({
       success: false,

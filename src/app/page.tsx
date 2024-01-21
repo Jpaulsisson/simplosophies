@@ -1,22 +1,9 @@
 'use client';
 
-import Spinner from "@/components/Spinner";
 import styles from './home.module.css';
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-
-type Blog = {
-  postId: string;
-  title: string;
-  createdAt: Date;
-  article: string;
-  image: string;
-  footnote: string;
-  category: string;
-  userId: string;
-}
+import { Blog } from "@/utils/types";
+import BlogCard from '@/components/BlogCard/BlogCard';
 
 export default function Home() {
 
@@ -45,11 +32,8 @@ export default function Home() {
       <section className={styles.recentPostsContainer}>
         <h2 className={styles.recentHeader}>Recent Posts</h2>
         {recents.length > 0 ?
-          recents.map((blog) => (
-            <Link href={`/blog/${blog.postId}`} className={styles.blogCard} key={blog.postId}>
-              <h2 className={styles.blogTitle}>{blog.title}</h2>
-              <Image className={styles.blogImage} src={blog.image} alt={blog.title} width={150} height={120} />
-            </Link>
+          recents.map((blog, idx) => (
+            <BlogCard blog={blog} key={blog.postId} isEven={idx % 2 === 0} />
           ))
           : null}
       </section>

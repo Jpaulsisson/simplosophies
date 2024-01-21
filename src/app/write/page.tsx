@@ -8,7 +8,7 @@ import { firebaseConfig } from '@/utils';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { GlobalContext } from '@/context';
 import Spinner from '@/components/Spinner';
-import { NewBlogData } from '@/utils/types';
+import { BlogContent } from '@/utils/types';
 import { useSession } from 'next-auth/react';
 
 const app = initializeApp(firebaseConfig);
@@ -64,7 +64,7 @@ function Write() {
     })
   }
 
-  async function handleSubmit(formData: NewBlogData) {
+  async function handleSubmit(formData: BlogContent) {
     const newPost = await fetch('/api/posts/createPost', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
