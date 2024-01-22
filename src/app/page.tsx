@@ -31,7 +31,7 @@ export default function Home() {
       </section>
       <section className={styles.recentPostsContainer}>
         <h2 className={styles.recentHeader}>Recent Posts</h2>
-        {recents.length > 0 ?
+        {recents ?
           recents.map((blog, idx) => (
             <BlogCard blog={blog} key={blog.postId} isEven={idx % 2 === 0} />
           ))

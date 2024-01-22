@@ -6,25 +6,34 @@
 }
 
 .isEven {
+  display: grid;
   background: linear-gradient(90deg, var(--primaryAccent), var(--darkAccent) 34% 67%, var(--bgColor));
   background-size: 500%;
   background-position: right;
-  transition-duration: 1750ms;
+  transition-duration: 750ms;
 }
 
 .isEven:hover {
   background-position: left;
+  scale: 1.08;
 }
 
 .notEven {
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   background: linear-gradient(90deg, var(--bgColor), var(--darkAccent) 34% 67%, var(--primaryAccent));
   background-size: 500%;
   background-position: left;
-  transition-duration: 1750ms;
+  transition-duration: 750ms;
 }
 
 .notEven:hover {
   background-position: right;
+  scale: 1.08;
+}
+
+.image {
+  border-radius: 8px;
+  box-shadow: 1px 1px 5px 0px black;
 }
