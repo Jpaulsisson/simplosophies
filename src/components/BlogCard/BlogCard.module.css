@@ -5,32 +5,38 @@
   border-radius: 4px;
 }
 
-.isEven {
-  display: grid;
-  background: linear-gradient(90deg, var(--primaryAccent), var(--darkAccent) 34% 67%, var(--bgColor));
-  background-size: 500%;
-  background-position: right;
-  transition-duration: 750ms;
-}
-
-.isEven:hover {
-  background-position: left;
-  scale: 1.08;
-}
-
+.isEven,
 .notEven {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  background: linear-gradient(90deg, var(--bgColor), var(--darkAccent) 34% 67%, var(--primaryAccent));
+}
+
+.isEven {
+  background: linear-gradient(90deg, var(--primaryAccent), var(--darkAccent) 40%, var(--bgColor));
+  background-position: right;
   background-size: 500%;
+  transition-duration: 500ms;
+}
+
+.notEven {
+  background: linear-gradient(90deg, var(--bgColor), var(--darkAccent) 40%, var(--primaryAccent));
   background-position: left;
-  transition-duration: 750ms;
+  background-size: 500%;
+  transition-duration: 500ms;
+}
+
+.isEven:hover,
+.notEven:hover {
+  scale: 1.02;
+}
+
+.isEven:hover {
+  background-position: left;
 }
 
 .notEven:hover {
   background-position: right;
-  scale: 1.08;
 }
 
 .image {

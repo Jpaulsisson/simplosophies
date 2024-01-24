@@ -17,6 +17,16 @@
   text-align: end;
 }
 
+.introContainer {
+  margin-top: 60px;
+}
+
+.introContent {
+  font-weight: 400;
+  font-size: 14px;
+  padding-right: 100px;
+}
+
 .recentPostsContainer {
   position: relative;
   display: flex;
