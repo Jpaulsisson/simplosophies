@@ -33,6 +33,12 @@ function BlogPage() {
         <div>
           <h3>{blogData.title}</h3>
           <p>{blogData.article}</p>
+
+
+
+
+
+
           {username === 'Paul Sisson' &&
             <button onClick={() => handleDeletePost(blogId.id as string)}>Delete post</button>
           }
