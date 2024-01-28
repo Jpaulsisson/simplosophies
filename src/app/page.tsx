@@ -4,6 +4,7 @@ import styles from './home.module.css';
 import { useEffect, useState } from "react";
 import { Blog } from "@/utils/types";
 import BlogCard from '@/components/BlogCard/BlogCard';
+import RecentCarousel from '@/components/RecentCarousel/recentCarousel';
 
 export default function Home() {
 
@@ -29,14 +30,15 @@ export default function Home() {
         <h2 className={styles.welcome}>Hey there, welcome to Simplosophies.</h2>
         <p className={styles.subwelcome}>...it&apos;s basically my personal LiveJournal.</p>
       </section>
-      <section className={styles.recentPostsContainer}>
-        <h2 className={styles.recentHeader}>Recent Posts</h2>
-        {recents ?
-          recents.map((blog, idx) => (
-            <BlogCard blog={blog} key={blog.postId} isEven={idx % 2 === 0} />
-          ))
-          : null}
+      <section>
+        <RecentCarousel recentPosts={recents} />
       </section>
     </main>
   )
 }
+{/* <h2 className={styles.recentHeader}>Recent Posts</h2> */ }
+{/* {recents ?
+          recents.map((blog, idx) => (
+            <BlogCard blog={blog} key={blog.postId} isEven={idx % 2 === 0} />
+          ))
+          : null} */}

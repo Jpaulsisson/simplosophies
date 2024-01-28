@@ -1,0 +1,100 @@
+.container {
+  margin-top: 50px;
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  margin-top: 50px;
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--bgColor)), linear-gradient(180deg, transparent 0% 85%, var(--bgColor)), linear-gradient(0deg, transparent 0% 90%, var(--bgColor)), linear-gradient(270deg, transparent 0% 90%, var(--bgColor));
+  top: 0;
+  left: 0;
+}
+
+.postContainer,
+.numberContainer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  transition: all 1000ms;
+  background-size: cover;
+  background-position: center;
+}
+
+.postContainer {
+  left: 0;
+  width: 80%;
+}
+
+.postContainer.active {
+  opacity: 1;
+}
+
+.postContainer.inactive {
+  opacity: 0;
+}
+
+.numberContainer {
+  right: 0;
+  width: 20%;
+  background: var(--bgColor);
+}
+
+.numberContainer::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background: linear-gradient(0deg, var(--bgColor) 0% 15%, var(--primaryFont) 15% 35%, var(--bgColor) 35% 40%, var(--primaryFont) 40% 45%, var(--bgColor) 45% 65%, var(--primaryFont) 65% 90%, var(--bgColor) 90% 100%);
+}
+
+.numberContainer::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  top: 0;
+  right: 0;
+  background: linear-gradient(90deg, var(--bgColor) 0% 15%, var(--primaryFont) 15% 30%, var(--bgColor) 30% 38%, var(--primaryFont) 38% 65%, var(--bgColor) 65% 100%);
+}
+
+.numberContainer.active {
+  opacity: 1;
+}
+
+.numberContainer.inactive {
+  opacity: 0;
+}
+
+.titleContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: all 1000ms;
+}
+
+.titleContainer.active {
+  opacity: 1;
+}
+
+.titleContainer.inactive {
+  opacity: 0;
+}
+
+.title {
+  color: white;
+  font-size: clamp(10px, 4vw, 16px);
+  align-self: flex-end;
+}

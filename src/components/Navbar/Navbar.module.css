@@ -9,7 +9,7 @@
 }
 
 .logoText {
-  font-size: clamp(2.25rem, 5vw, 5rem);
+  font-size: clamp(2.15rem, 5vw, 5rem);
   color: hsl(170, 60%, 35%);
   width: 100%;
   text-align: end;
@@ -22,4 +22,5 @@
 
 .loginBtn {
   all: unset;
+  font-size: clamp(12px, 2vw, 16px);
 }

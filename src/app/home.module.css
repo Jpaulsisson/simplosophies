@@ -17,6 +17,7 @@
   text-align: end;
 }
 
+/* 
 .recentPostsContainer {
   position: relative;
   display: flex;
@@ -40,12 +41,12 @@
   font-size: 22px;
   font-weight: 900;
   width: 100%;
-}
+} */
 
-.blogCard {
+/* .blogCard {
   min-width: 280px;
   padding: 8px;
   border: 1px solid var(--primaryFont);
   border-radius: 8px;
   gap: 12px;
-}
+} */
