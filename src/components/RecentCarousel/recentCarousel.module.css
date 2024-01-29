@@ -5,7 +5,7 @@
 .carouselContainer {
   position: relative;
   width: 100%;
-  height: 220px;
+  height: 320px;
   margin-top: 50px;
 }
 
@@ -18,6 +18,14 @@
   left: 0;
 }
 
+.header {
+  padding-block: 20px;
+  padding-left: 20px;
+  background: linear-gradient(180deg, var(--bgColor) 0% 15%, var(--primaryAccent) 15% 22%, var(--bgColor) 22% 40%, var(--primaryFont) 40% 65%, var(--bgColor) 65% 90%, var(--primaryFont) 90% 100%);
+  background-size: 1px 100%;
+  background-repeat: no-repeat;
+}
+
 .postContainer,
 .numberContainer {
   position: absolute;
@@ -26,7 +34,9 @@
   display: flex;
   align-items: center;
   padding-left: 10px;
-  transition: all 1000ms;
+  transition:
+    opacity calc(var(--transitionDuration)),
+    translate var(--transitionDuration);
   background-size: cover;
   background-position: center;
 }
@@ -38,10 +48,13 @@
 
 .postContainer.active {
   opacity: 1;
+  translate: 0px 0px;
 }
 
 .postContainer.inactive {
   opacity: 0;
+  translate: 0px 400px;
+  pointer-events: none;
 }
 
 .numberContainer {
@@ -57,7 +70,7 @@
   height: 100%;
   top: 0;
   right: 0;
-  background: linear-gradient(0deg, var(--bgColor) 0% 15%, var(--primaryFont) 15% 35%, var(--bgColor) 35% 40%, var(--primaryFont) 40% 45%, var(--bgColor) 45% 65%, var(--primaryFont) 65% 90%, var(--bgColor) 90% 100%);
+  background: linear-gradient(0deg, var(--bgColor) 0% 15%, var(--primaryFont) 15% 35%, var(--bgColor) 35% 40%, var(--primaryFont) 40% 45%, var(--bgColor) 45% 65%, var(--primaryAccent) 65% 67%, var(--bgColor) 67% 80%, var(--primaryFont) 80% 85%, var(--bgColor) 85% 100%);
 }
 
 .numberContainer::before {
@@ -67,34 +80,49 @@
   height: 1px;
   top: 0;
   right: 0;
-  background: linear-gradient(90deg, var(--bgColor) 0% 15%, var(--primaryFont) 15% 30%, var(--bgColor) 30% 38%, var(--primaryFont) 38% 65%, var(--bgColor) 65% 100%);
+  background: linear-gradient(90deg, var(--bgColor) 0% 15%, var(--primaryFont) 15% 30%, var(--bgColor) 30% 38%, var(--primaryFont) 38% 65%, var(--bgColor) 65% 98%, var(--primaryAccent) 98% 100%);
 }
 
 .numberContainer.active {
   opacity: 1;
+  translate: 0px 0px;
 }
 
 .numberContainer.inactive {
   opacity: 0;
+  translate: 0px -400px;
 }
 
 .titleContainer {
   position: absolute;
+  width: 80%;
   bottom: 0;
   left: 0;
-  transition: all 1000ms;
+  transition: all var(--transitionDuration);
 }
 
 .titleContainer.active {
   opacity: 1;
+  translate: 0px 0px;
 }
 
 .titleContainer.inactive {
   opacity: 0;
+  translate: 0px 400px;
 }
 
 .title {
-  color: white;
-  font-size: clamp(10px, 4vw, 16px);
+  color: var(--primaryFont);
+  font-size: clamp(11px, 3vw, 18px);
   align-self: flex-end;
+  padding-inline: 10px;
+  padding-block: 5px;
+}
+
+.buttons {
+  width: 30%;
+  margin-top: 50px;
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
 }

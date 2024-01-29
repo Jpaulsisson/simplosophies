@@ -3,6 +3,8 @@
   --primaryAccent: hsl(170, 60%, 35%);
   --darkAccent: hsl(159, 60%, 15%);
   --primaryFont: hsl(0, 6%, 93%);
+
+  --transitionDuration: 750ms;
 }
 
 *,

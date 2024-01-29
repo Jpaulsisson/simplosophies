@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import styles from './recentCarousel.module.css';
 import { Blog } from '@/utils/types';
 import Link from 'next/link';
+import { useState } from 'react';
+import styles from './recentCarousel.module.css';
+import { MdLightbulb, MdLightbulbOutline } from 'react-icons/md'
+import { FaCircleChevronLeft, FaCircleChevronRight } from "react-icons/fa6";
 
 type RecentCarouselProps = {
   recentPosts: Blog[];
@@ -26,7 +28,27 @@ function RecentCarousel({ recentPosts }: RecentCarouselProps) {
 
   return (
     <div className={styles.container}>
-      <h2>Recent Posts</h2>
+      <h2 className={styles.header}>Recent Posts</h2>
+      <div className={styles.buttons}>
+        <button style={{ all: "unset", display: "flex", alignItems: "center" }} onClick={handlePrev}>
+          <FaCircleChevronLeft style={{ color: "var(--darkAccent)", height: 28, width: 28 }} />
+        </button>
+        {recentPosts.map((_, index) => {
+          return (
+            <div key={index} style={{ display: "flex", alignItems: "center" }}>
+              {
+                index === activeIdx ?
+                  <MdLightbulb style={{ color: 'var(--primaryAccent)', height: 20, width: 20 }} />
+                  :
+                  <MdLightbulbOutline style={{ color: '#222222', height: 12, width: 12 }} />
+              }
+            </div>
+          )
+        })}
+        <button style={{ all: "unset", display: "flex", alignItems: "center" }} onClick={handleNext}>
+          <FaCircleChevronRight style={{ color: "var(--darkAccent)", height: 28, width: 28 }} />
+        </button>
+      </div>
       <div className={styles.carouselContainer}>
         {recentPosts.map((post, index) => {
           return (
@@ -38,15 +60,11 @@ function RecentCarousel({ recentPosts }: RecentCarouselProps) {
                 <h2 className={styles.title}>{post.title}</h2>
               </div>
               <div className={index === activeIdx ? `${styles.numberContainer} ${styles.active}` : `${styles.numberContainer} ${styles.inactive}`}>
-                <h2 className={styles.number}>{`- - 0${activeIdx}`}</h2>
+                <h2 className={styles.number}>{`˚•• - 0${activeIdx + 1}`}</h2>
               </div>
             </Link>
           )
         })}
-      </div>
-      <div style={{ marginBlock: '150px' }}>
-        <button onClick={handlePrev}>Previous</button>
-        <button onClick={handleNext}>Next</button>
       </div>
     </div>
   )
