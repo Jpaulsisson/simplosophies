@@ -1,0 +1,18 @@
+.buttons {
+  width: 30%;
+  margin-top: 50px;
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icons {
+  all: unset;
+  display: flex;
+  align-items: center;
+}
+
+.bulbs {
+  display: flex;
+  align-items: center;
+}

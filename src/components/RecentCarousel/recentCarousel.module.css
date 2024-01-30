@@ -119,10 +119,6 @@
   padding-block: 5px;
 }
 
-.buttons {
-  width: 30%;
-  margin-top: 50px;
-  margin-inline: auto;
-  display: flex;
-  justify-content: space-between;
+.progressTickerContainer {
+  width: 100%;
 }
