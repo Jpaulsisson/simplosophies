@@ -5,6 +5,8 @@ import { useGlobalContext } from '@/context';
 import { BlogContent } from '@/utils/types';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import styles from './Blog.module.css';
+import Image from 'next/image';
 
 function BlogPage() {
 
@@ -24,30 +26,31 @@ function BlogPage() {
   async function handleDeletePost(id: string) {
     const res = await fetch(`/api/posts/deletePost?postId=${id}`, { method: "DELETE" });
     const data = await res.json();
-    console.log('deleted')
   }
 
   return (
-    <div>
+    <>
       {blogData ?
-        <div>
-          <h3>{blogData.title}</h3>
-          <p>{blogData.article}</p>
-
-
-
-
-
+        <>
+          <div className={styles.container}>
+            <div className={styles.headerImageContainer}>
+              <Image src={blogData.image} alt='article image' className={styles.headerImage} width={900} height={900} />
+            </div>
+            <div className={styles.titleContainer}>
+              <h2 className={styles.title}>{blogData.title}</h2>
+              <div className={styles.titleLine} />
+            </div>
+            <p className={styles.article}>{blogData.article}</p>
+          </div>
 
           {username === 'Paul Sisson' &&
             <button onClick={() => handleDeletePost(blogId.id as string)}>Delete post</button>
           }
-
-        </div>
+        </>
         :
         <Spinner visible={true} />
       }
-    </div>
+    </>
   )
 }
 

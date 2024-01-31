@@ -12,6 +12,10 @@
   align-items: center;
 }
 
+.icons:active {
+  filter: brightness(3);
+}
+
 .bulbs {
   display: flex;
   align-items: center;
