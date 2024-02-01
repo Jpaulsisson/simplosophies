@@ -73,8 +73,6 @@ function Write() {
         userId: session?.user?.name,
       })
     })
-
-    console.log(newPost)
   }
 
   async function handleChangeImage(event: React.ChangeEvent<HTMLInputElement>) {

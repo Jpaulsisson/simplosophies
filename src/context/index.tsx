@@ -1,7 +1,7 @@
 'use client'
 
 import { initialBlogContent } from "@/utils";
-import { BlogContent } from "@/utils/types";
+import { Blog, BlogContent } from "@/utils/types";
 import { useSession } from "next-auth/react";
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 
@@ -11,6 +11,7 @@ type ContextType = {
   blogData: BlogContent;
   setBlogData: Dispatch<SetStateAction<BlogContent>>;
   username: string;
+  posts: Blog[],
 }
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   blogData: initialBlogContent,
   setBlogData: () => { },
   username: '',
+  posts: [],
 }
 
 export const GlobalContext = createContext<ContextType>(initialState)
@@ -27,6 +29,7 @@ export default function GlobalState({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(false);
   const [blogData, setBlogData] = useState(initialBlogContent);
   const [username, setUsername] = useState('');
+  const [posts, setPosts] = useState([]);
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -36,7 +39,21 @@ export default function GlobalState({ children }: { children: ReactNode }) {
     }
   }, [session])
 
-  return <GlobalContext.Provider value={{ loading, setLoading, blogData, setBlogData, username }}>{children}</GlobalContext.Provider>
+  async function handleGetPosts() {
+    const res = await fetch('/api/posts/getAllPosts')
+    const posts = await res.json();
+    return posts.data;
+  }
+
+  useEffect(() => {
+    async function getPosts() {
+      const posts = await handleGetPosts();
+      setPosts(posts);
+    }
+    getPosts();
+  }, [])
+
+  return <GlobalContext.Provider value={{ loading, setLoading, blogData, setBlogData, username, posts }}>{children}</GlobalContext.Provider>
 }
 
 export function useGlobalContext() {

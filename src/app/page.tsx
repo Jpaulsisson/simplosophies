@@ -1,27 +1,13 @@
 'use client';
 
 import styles from './home.module.css';
-import { useEffect, useState } from "react";
-import { Blog } from "@/utils/types";
-import RecentCarousel from '@/components/RecentCarousel/recentCarousel';
+import { Random, RecentCarousel } from '@/components';
+import { useGlobalContext } from '@/context';
 
 export default function Home() {
 
-  const [recents, setRecents] = useState<Blog[]>([]);
-
-  async function handleGetPosts() {
-    const res = await fetch('/api/posts/getSixPosts')
-    const posts = await res.json();
-    return posts.data;
-  }
-
-  useEffect(() => {
-    async function getPosts() {
-      const posts = await handleGetPosts();
-      setRecents(posts);
-    }
-    getPosts();
-  }, [])
+  const { posts } = useGlobalContext();
+  const recents = posts.slice(0, 6);
 
   return (
     <main className={styles.container}>
@@ -31,6 +17,9 @@ export default function Home() {
       </section>
       <section>
         <RecentCarousel recentPosts={recents} />
+      </section>
+      <section>
+        <Random />
       </section>
     </main>
   )

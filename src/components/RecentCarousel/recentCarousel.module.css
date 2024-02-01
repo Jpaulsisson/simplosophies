@@ -35,7 +35,7 @@
   align-items: center;
   padding-left: 10px;
   transition:
-    opacity calc(var(--transitionDuration)),
+    opacity var(--transitionDuration),
     translate var(--transitionDuration);
   background-size: cover;
   background-position: center;
@@ -70,7 +70,7 @@
   height: 100%;
   top: 0;
   right: 0;
-  background: linear-gradient(0deg, var(--bgColor) 0% 15%, var(--primaryFont) 15% 35%, var(--bgColor) 35% 40%, var(--primaryFont) 40% 45%, var(--bgColor) 45% 65%, var(--primaryAccent) 65% 67%, var(--bgColor) 67% 80%, var(--primaryFont) 80% 85%, var(--bgColor) 85% 100%);
+  background: linear-gradient(0deg, var(--bgColor) 0% 30%, var(--darkAccent) 30% 45%, var(--bgColor) 45% 65%, var(--primaryFont) 65% 77%, var(--bgColor) 77% 100%);
 }
 
 .numberContainer::before {
@@ -80,7 +80,7 @@
   height: 1px;
   top: 0;
   right: 0;
-  background: linear-gradient(90deg, var(--bgColor) 0% 15%, var(--primaryFont) 15% 30%, var(--bgColor) 30% 38%, var(--primaryFont) 38% 65%, var(--bgColor) 65% 98%, var(--primaryAccent) 98% 100%);
+  background: linear-gradient(90deg, var(--bgColor) 0% 38%, var(--primaryFont) 38% 65%, var(--bgColor) 65% 70%, var(--primaryAccent) 70% 90%, var(--bgColor) 90% 100%);
 }
 
 .numberContainer.active {

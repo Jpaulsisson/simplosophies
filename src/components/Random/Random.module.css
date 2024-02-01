@@ -1,0 +1,21 @@
+.content {
+  margin-block: 75px;
+  color: var(--primaryFont);
+  font-size: 14px;
+  font-style: italic;
+  text-align: right;
+}
+
+.content.active {
+  opacity: 1;
+  transition: all 400ms;
+}
+
+.content.inactive {
+  opacity: 0;
+  transition: all 400ms;
+}
+
+.title {
+  font-size: 12px;
+}
