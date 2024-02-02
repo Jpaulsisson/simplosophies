@@ -2,26 +2,17 @@
 
 import Spinner from '@/components/Spinner';
 import { useGlobalContext } from '@/context';
-import { BlogContent } from '@/utils/types';
 import { useParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './Blog.module.css';
 import Image from 'next/image';
 
 function BlogPage() {
 
-  const blogId = useParams()
-  const { username } = useGlobalContext();
-  const [blogData, setBlogData] = useState<BlogContent | null>();
+  const { id } = useParams()
+  const { username, posts } = useGlobalContext();
 
-  useEffect(() => {
-    async function getBlogData(id: string) {
-      const res = await fetch(`/api/posts/getPost?postId=${id}`)
-      const data = await res.json();
-      setBlogData(data.data);
-    }
-    getBlogData(blogId.id as string)
-  }, [blogId])
+  const blogData = posts.find(post => post.postId === id);
 
   async function handleDeletePost(id: string) {
     const res = await fetch(`/api/posts/deletePost?postId=${id}`, { method: "DELETE" });
@@ -35,6 +26,9 @@ function BlogPage() {
           <div className={styles.container}>
             <div className={styles.headerImageContainer}>
               <Image src={blogData.image} alt='article image' className={styles.headerImage} width={900} height={900} />
+              <a className={styles.photoCredit} href={`https://unsplash.com/@${blogData.photoCredit}`}>
+                <h3>Photo by: {blogData.photoCredit}</h3>
+              </a>
             </div>
             <div className={styles.titleContainer}>
               <h2 className={styles.title}>{blogData.title}</h2>
@@ -44,11 +38,11 @@ function BlogPage() {
           </div>
 
           {username === 'Paul Sisson' &&
-            <button onClick={() => handleDeletePost(blogId.id as string)}>Delete post</button>
+            <button onClick={() => handleDeletePost(id as string)}>Delete post</button>
           }
         </>
         :
-        <Spinner visible={true} />
+        <Spinner visible={true} size='LG' />
       }
     </>
   )

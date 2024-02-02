@@ -21,7 +21,7 @@
 .header {
   padding-block: 20px;
   padding-left: 20px;
-  background: linear-gradient(180deg, var(--bgColor) 0% 15%, var(--primaryAccent) 15% 22%, var(--bgColor) 22% 40%, var(--primaryFont) 40% 65%, var(--bgColor) 65% 90%, var(--primaryFont) 90% 100%);
+  background: linear-gradient(180deg, var(--bgColor) 0% 15%, var(--primaryAccent) 15% 22%, var(--bgColor) 22% 40%, var(--primaryFont) 40% 65%, var(--bgColor) 65% 90%, var(--yellowAccent) 90% 100%);
   background-size: 1px 100%;
   background-repeat: no-repeat;
 }
@@ -70,7 +70,7 @@
   height: 100%;
   top: 0;
   right: 0;
-  background: linear-gradient(0deg, var(--bgColor) 0% 30%, var(--darkAccent) 30% 45%, var(--bgColor) 45% 65%, var(--primaryFont) 65% 77%, var(--bgColor) 77% 100%);
+  background: linear-gradient(0deg, var(--bgColor) 0% 20%, var(--yellowAccent) 20% 25%, var(--bgColor) 25% 30%, var(--primaryAccent) 30% 45%, var(--bgColor) 45% 65%, var(--primaryFont) 65% 77%, var(--bgColor) 77% 100%);
 }
 
 .numberContainer::before {

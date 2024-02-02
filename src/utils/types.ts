@@ -5,6 +5,7 @@ export type BlogContent = {
   image: string;
   footnote: string;
   category: string;
+  photoCredit: string;
 }
 
 export type Blog = {
@@ -16,4 +17,5 @@ export type Blog = {
   footnote: string;
   category: string;
   userId: string;
+  photoCredit: string;
 }

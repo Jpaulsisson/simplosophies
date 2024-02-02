@@ -1,15 +1,14 @@
 'use client'
 
-import { initialBlogContent } from "@/utils";
-import { Blog, BlogContent } from "@/utils/types";
+import { Blog } from "@/utils/types";
 import { useSession } from "next-auth/react";
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Spinner } from "@/components";
 
 type ContextType = {
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  blogData: BlogContent;
-  setBlogData: Dispatch<SetStateAction<BlogContent>>;
   username: string;
   posts: Blog[],
 }
@@ -17,8 +16,6 @@ type ContextType = {
 const initialState = {
   loading: false,
   setLoading: () => { },
-  blogData: initialBlogContent,
-  setBlogData: () => { },
   username: '',
   posts: [],
 }
@@ -27,7 +24,6 @@ export const GlobalContext = createContext<ContextType>(initialState)
 
 export default function GlobalState({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(false);
-  const [blogData, setBlogData] = useState(initialBlogContent);
   const [username, setUsername] = useState('');
   const [posts, setPosts] = useState([]);
   const { data: session } = useSession();
@@ -45,15 +41,21 @@ export default function GlobalState({ children }: { children: ReactNode }) {
     return posts.data;
   }
 
-  useEffect(() => {
-    async function getPosts() {
-      const posts = await handleGetPosts();
-      setPosts(posts);
-    }
-    getPosts();
-  }, [])
+  const { data: postsData, isLoading, error } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => handleGetPosts(),
+  })
 
-  return <GlobalContext.Provider value={{ loading, setLoading, blogData, setBlogData, username, posts }}>{children}</GlobalContext.Provider>
+  useEffect(() => {
+    if (postsData) {
+      setPosts(postsData);
+    }
+  }, [postsData])
+
+  if (isLoading) return <Spinner visible={true} size="XL" />
+  if (error) return <Spinner visible={true} size="XL" color="crimson" />
+
+  return <GlobalContext.Provider value={{ loading, setLoading, username, posts }}>{children}</GlobalContext.Provider>
 }
 
 export function useGlobalContext() {

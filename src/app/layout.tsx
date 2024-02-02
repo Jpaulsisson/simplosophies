@@ -5,6 +5,9 @@ import './globals.css';
 import NextAuthProvider from '@/providers/next-auth-provider';
 import NextThemeProvider from '@/providers/theme-provider';
 import GlobalState from '@/context';
+import ReactQueryProvider from '@/providers/react-query-provider';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
 
 export const metadata: Metadata = {
   title: 'Simplosophies',
@@ -17,7 +20,6 @@ const font = Urbanist({
   style: ['italic', 'normal']
 })
 
-
 export default function RootLayout({
   children,
 }: {
@@ -28,10 +30,13 @@ export default function RootLayout({
       <body>
         <NextThemeProvider>
           <NextAuthProvider>
-            <GlobalState>
-              <Navbar />
-              {children}
-            </GlobalState>
+            <ReactQueryProvider>
+              <GlobalState>
+                <Navbar />
+                {children}
+              </GlobalState>
+              <ReactQueryDevtools />
+            </ReactQueryProvider>
           </NextAuthProvider>
         </NextThemeProvider>
       </body>

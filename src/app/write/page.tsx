@@ -1,12 +1,11 @@
 'use client';
 
-import React, { ChangeEvent, useContext } from 'react';
+import React, { ChangeEvent } from 'react';
 import { useState } from 'react';
 import styles from './write.module.css';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '@/utils';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
-import { GlobalContext } from '@/context';
 import Spinner from '@/components/Spinner';
 import { BlogContent } from '@/utils/types';
 import { useSession } from 'next-auth/react';
@@ -33,9 +32,18 @@ async function handleSaveImageToFirebase(file: any) {
   })
 }
 
+const initialBlogContent = {
+  title: '',
+  article: '',
+  image: '',
+  footnote: '',
+  category: '',
+  photoCredit: '',
+}
+
 
 function Write() {
-  const { blogData, setBlogData } = useContext(GlobalContext)
+  const [blogData, setBlogData] = useState(initialBlogContent);
   const { data: session } = useSession();
   const [password, setPassword] = useState('');
   const [imageLoading, setImageLoading] = useState(false);
@@ -45,6 +53,14 @@ function Write() {
     setBlogData({
       ...blogData,
       title: target,
+    })
+  }
+
+  function handlePhotoCreditChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const target = e.target.value;
+    setBlogData({
+      ...blogData,
+      photoCredit: target,
     })
   }
 
@@ -105,15 +121,16 @@ function Write() {
           <div className={styles.writingContainer}>
             {/* Title */}
             <input className={styles.titleInput} onChange={handleTitleChange} placeholder='title...' value={blogData.title} type="text" />
-
             {/* Image */}
             <div className={styles.postImageContainer}>
               <div className={styles.spinnerAndLabelWrapper}>
                 <label className={styles.postImageLabel} htmlFor='postImage'>Choose a post image </label>
-                <Spinner visible={imageLoading} />
+                <Spinner visible={imageLoading} size='XS' />
               </div>
               <input className={styles.postImageInput} onChange={handleChangeImage} type="file" max={1000000} accept='image/*' name="postImage" id="postImage" />
             </div>
+            {/* Photo Credit */}
+            <input className={styles.footnoteInput} onChange={handlePhotoCreditChange} placeholder='photo credit...' value={blogData.photoCredit} type="text" />
             {/* Article */}
             <textarea onChange={(e) => setBlogData({ ...blogData, article: e.target.value })} placeholder='thoughts...' className={styles.articleInput} />
             <input className={styles.footnoteInput} type='text' onChange={handleFootnoteChange} value={blogData.footnote} placeholder='TLDR...' />
@@ -132,3 +149,4 @@ function Write() {
 }
 
 export default Write
+

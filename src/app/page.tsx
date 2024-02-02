@@ -24,3 +24,8 @@ export default function Home() {
     </main>
   )
 }
+
+
+// TODO: CONVERT FETCH CALLS TO AXIOS CALLS <-- it's already installed
+// TODO: ADD MORE CONTENT OF SOME KIND
+// TODO: CONVERT THE ADD & DELETE BLOG FETCH CALLS TO BE MUTATIONS IN REACT QUERY

@@ -11,12 +11,13 @@ datasource db {
 }
 
 model Posts {
-  postId    String   @id @default(uuid())
-  title     String
-  createdAt DateTime @default(now())
-  article   String
-  image     String
-  footnote  String
-  category  String
-  userId    String
+  postId      String   @id @default(uuid())
+  title       String
+  createdAt   DateTime @default(now())
+  article     String
+  image       String
+  photoCredit String   @default("Unknown")
+  footnote    String
+  category    String
+  userId      String
 }
