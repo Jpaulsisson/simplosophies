@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Spinner } from "@/components";
+import { handleGetPosts } from "@/utils/api-functions";
 
 type ContextType = {
   loading: boolean;
@@ -34,12 +35,6 @@ export default function GlobalState({ children }: { children: ReactNode }) {
       setUsername(name)
     }
   }, [session])
-
-  async function handleGetPosts() {
-    const res = await fetch('/api/posts/getAllPosts')
-    const posts = await res.json();
-    return posts.data;
-  }
 
   const { data: postsData, isLoading, error } = useQuery({
     queryKey: ["posts"],

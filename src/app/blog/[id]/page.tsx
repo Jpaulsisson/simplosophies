@@ -6,17 +6,31 @@ import { useParams } from 'next/navigation';
 import React from 'react';
 import styles from './Blog.module.css';
 import Image from 'next/image';
+import { handleDeletePost } from '@/utils/api-functions';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { DeleteMutationVar } from '@/utils/types';
 
 function BlogPage() {
 
   const { id } = useParams()
   const { username, posts } = useGlobalContext();
+  const queryClient = useQueryClient();
 
   const blogData = posts.find(post => post.postId === id);
 
-  async function handleDeletePost(id: string) {
-    const res = await fetch(`/api/posts/deletePost?postId=${id}`, { method: "DELETE" });
-    const data = await res.json();
+  const deletePostMutation = useMutation<Response, Error, DeleteMutationVar>({
+    mutationFn: ({ id }) => handleDeletePost(id),
+    onSuccess(data) {
+      queryClient.invalidateQueries();
+      console.log(`Deleted: ${data}`)
+    },
+    onError: () => console.log("something happened... something bad.")
+  })
+
+  function handleDelete(id: string) {
+    deletePostMutation.mutate({
+      id
+    })
   }
 
   return (
@@ -38,7 +52,7 @@ function BlogPage() {
           </div>
 
           {username === 'Paul Sisson' &&
-            <button onClick={() => handleDeletePost(id as string)}>Delete post</button>
+            <button onClick={() => handleDelete(id as string)}>Delete post</button>
           }
         </>
         :

@@ -19,3 +19,12 @@ export type Blog = {
   userId: string;
   photoCredit: string;
 }
+
+export type MutationVariables = {
+  formData: BlogContent;
+  userId: string;
+}
+
+export type DeleteMutationVar = {
+  id: string;
+}

@@ -7,8 +7,12 @@ import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '@/utils';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import Spinner from '@/components/Spinner';
-import { BlogContent } from '@/utils/types';
-import { useSession } from 'next-auth/react';
+import { useMutation } from '@tanstack/react-query';
+import { handleCreateNewPost } from '@/utils/api-functions';
+import { useGlobalContext } from '@/context';
+import { useQueryClient } from '@tanstack/react-query';
+import { BlogContent, MutationVariables } from '@/utils/types';
+import Error from 'next/error';
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app, 'gs://simplosophies.appspot.com');
@@ -44,9 +48,28 @@ const initialBlogContent = {
 
 function Write() {
   const [blogData, setBlogData] = useState(initialBlogContent);
-  const { data: session } = useSession();
   const [password, setPassword] = useState('');
   const [imageLoading, setImageLoading] = useState(false);
+  const { username } = useGlobalContext();
+  const queryClient = useQueryClient();
+
+  const createNewBlogMutation = useMutation<Response, Error, MutationVariables>({
+    mutationFn: ({ formData, userId }) => handleCreateNewPost(formData, userId),
+    onSuccess(data) {
+      queryClient.invalidateQueries();
+      console.log(data)
+    },
+    onError(error) {
+      console.log(error)
+    },
+  })
+
+  function handleSubmit(formData: BlogContent, userId: string) {
+    createNewBlogMutation.mutate({
+      formData,
+      userId
+    })
+  }
 
   function handleTitleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const target = e.target.value;
@@ -77,17 +100,6 @@ function Write() {
     setBlogData({
       ...blogData,
       category: target,
-    })
-  }
-
-  async function handleSubmit(formData: BlogContent) {
-    const newPost = await fetch('/api/posts/createPost', {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...formData,
-        userId: session?.user?.name,
-      })
     })
   }
 
@@ -135,13 +147,13 @@ function Write() {
             <textarea onChange={(e) => setBlogData({ ...blogData, article: e.target.value })} placeholder='thoughts...' className={styles.articleInput} />
             <input className={styles.footnoteInput} type='text' onChange={handleFootnoteChange} value={blogData.footnote} placeholder='TLDR...' />
             <input className={styles.categoryInput} type='text' placeholder='comma-separated tags...' onChange={handleTagsChange} value={blogData.category} />
-            <button className={styles.submitButton} onClick={() => handleSubmit(blogData)}>Add Blog</button>
+            <button className={styles.submitButton} onClick={() => handleSubmit(blogData, username)}>Add Blog</button>
           </div>
         </>
         :
         <div className={styles.passwordContainer}>
           <label className={styles.passwordLabel}>Password:</label>
-          <input className={styles.passwordInput} value={password} type='password' onChange={handlePasswordChange} />
+          <input className={styles.passwordInput} autoFocus={true} value={password} type='password' onChange={handlePasswordChange} />
         </div>
       }
     </div>
