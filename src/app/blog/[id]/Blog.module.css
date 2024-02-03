@@ -47,6 +47,16 @@
   line-height: 1.7;
 }
 
+.delete {
+  all: unset;
+  padding: 12px;
+  margin-top: 200px;
+  background-color: hsl(348, 93%, 30%);
+  border: 1px solid var(--primaryFont);
+  border-radius: 6px;
+  box-shadow: 2px 2px 2px 0 hsl(348, 93%, 30%), -2px -2px 2px 0 hsl(348, 93%, 30%), -2px 2px 2px 0 hsl(348, 93%, 30%), 2px -2px 2px 0 hsl(348, 93%, 30%);
+}
+
 @media screen and (max-width: 768px) {
   .headerImageContainer {
     flex-direction: column;

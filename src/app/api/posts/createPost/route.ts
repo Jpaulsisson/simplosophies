@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function POST(request: NextRequest) {
   try {
     const postData = await request.json();
-    console.log(postData)
     const newPost = await prisma.posts.create({
       data: postData,
     })
@@ -25,7 +24,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: false,
-      message: "Something went wrong"
+      message: {
+        nope: 'this big failed',
+        error: error,
+      }
     })
   }
 

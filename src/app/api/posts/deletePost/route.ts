@@ -16,7 +16,7 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({
       data: post,
       success: true,
-      message: 'Blog data pulled.'
+      message: 'Deleted the blog yo.'
     })
 
   } catch (error) {

@@ -8,11 +8,13 @@ import { firebaseConfig } from '@/utils';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import Spinner from '@/components/Spinner';
 import { useMutation } from '@tanstack/react-query';
-import { handleCreateNewPost } from '@/utils/api-functions';
+import { addPost } from '@/utils/api-functions';
 import { useGlobalContext } from '@/context';
 import { useQueryClient } from '@tanstack/react-query';
 import { BlogContent, MutationVariables } from '@/utils/types';
 import Error from 'next/error';
+import { AxiosResponse } from 'axios';
+import { useRouter } from 'next/navigation';
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app, 'gs://simplosophies.appspot.com');
@@ -52,15 +54,16 @@ function Write() {
   const [imageLoading, setImageLoading] = useState(false);
   const { username } = useGlobalContext();
   const queryClient = useQueryClient();
+  const router = useRouter();
 
-  const createNewBlogMutation = useMutation<Response, Error, MutationVariables>({
-    mutationFn: ({ formData, userId }) => handleCreateNewPost(formData, userId),
+  const createNewBlogMutation = useMutation<AxiosResponse, Error, MutationVariables>({
+    mutationFn: ({ formData, userId }) => addPost(formData, userId),
     onSuccess(data) {
       queryClient.invalidateQueries();
-      console.log(data)
+      router.replace('/')
     },
     onError(error) {
-      console.log(error)
+      console.error(error)
     },
   })
 

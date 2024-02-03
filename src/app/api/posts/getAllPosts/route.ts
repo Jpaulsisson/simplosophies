@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
     const posts = await prisma.posts.findMany({ orderBy: { createdAt: 'desc' } })
     if (posts && posts.length > 0) {
       return NextResponse.json({
-        data: posts,
+        posts,
         success: true,
         message: "Posts got gotted."
       })

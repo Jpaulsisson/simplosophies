@@ -1,26 +1,40 @@
 import { BlogContent } from "./types"
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 
-export async function handleCreateNewPost(formData: BlogContent, userId: string) {
-  const newPost = await fetch('/api/posts/createPost', {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      ...formData,
-      userId: userId,
-    })
-  })
-  return newPost
+export async function getPosts() {
+  try {
+    const { data } = await axios('/api/posts/getAllPosts', { headers: { Accept: 'application/json' } });
+    const posts = data.posts;
+    return posts
+  } catch (error) {
+    console.error(error)
+  }
 }
 
-export async function handleDeletePost(id: string) {
-  const res = await fetch(`/api/posts/deletePost?postId=${id}`, { method: "DELETE" });
-  const data = await res.json();
-  return data;
+export async function addPost(formData: BlogContent, userId: string) {
+  try {
+    const response = await axios.post(
+      '/api/posts/createPost',
+      { ...formData, userId },
+      {
+        headers:
+          { Accept: 'application/json' }
+      }
+    );
+    console.log(response);
+    return response
+  } catch (error) {
+    return Promise.reject(error)
+  }
 }
 
-export async function handleGetPosts() {
-  const res = await fetch('/api/posts/getAllPosts')
-  const posts = await res.json();
-  return posts.data;
+export async function deletePost(id: string): Promise<AxiosResponse<any, any>> {
+  try {
+    const response = await axios.delete(`/api/posts/deletePost?postId=${id}`)
+    console.log(response)
+    return response;
+  } catch (error) {
+    console.error(error);
+    return Promise.reject(error)
+  }
 }

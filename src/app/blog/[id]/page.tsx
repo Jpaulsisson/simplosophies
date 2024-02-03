@@ -2,26 +2,29 @@
 
 import Spinner from '@/components/Spinner';
 import { useGlobalContext } from '@/context';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
 import styles from './Blog.module.css';
 import Image from 'next/image';
-import { handleDeletePost } from '@/utils/api-functions';
+import { deletePost } from '@/utils/api-functions';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { DeleteMutationVar } from '@/utils/types';
+import { AxiosResponse } from 'axios';
 
 function BlogPage() {
 
-  const { id } = useParams()
+  const { id } = useParams();
   const { username, posts } = useGlobalContext();
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const blogData = posts.find(post => post.postId === id);
 
-  const deletePostMutation = useMutation<Response, Error, DeleteMutationVar>({
-    mutationFn: ({ id }) => handleDeletePost(id),
+  const deletePostMutation = useMutation<AxiosResponse, Error, DeleteMutationVar>({
+    mutationFn: ({ id }) => deletePost(id),
     onSuccess(data) {
       queryClient.invalidateQueries();
+      router.replace('/');
       console.log(`Deleted: ${data}`)
     },
     onError: () => console.log("something happened... something bad.")
@@ -52,7 +55,7 @@ function BlogPage() {
           </div>
 
           {username === 'Paul Sisson' &&
-            <button onClick={() => handleDelete(id as string)}>Delete post</button>
+            <button className={styles.delete} onClick={() => handleDelete(id as string)}>Delete post</button>
           }
         </>
         :
