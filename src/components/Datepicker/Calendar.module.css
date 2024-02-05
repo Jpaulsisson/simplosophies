@@ -1,0 +1,12 @@
+.container {
+  width: 100%;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.dates {
+  padding: 8px;
+  text-align: center;
+}

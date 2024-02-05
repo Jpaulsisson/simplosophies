@@ -1,39 +1,53 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Datepicker.module.css';
 import { monthNames, dayNames, generateMonthYearList } from '@/utils/date-helpers';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Calendar from './Calendar';
 
 
 function formatDate(date: number, month: number, year: number) {
-  if (date && month && year) return monthNames[month] + ' ' + date + ', ' + year;
+  return monthNames[month] + ' ' + date + ', ' + year;
 }
 
 function formatMonthYear(month: number, year: number) {
-  if (month && year) return monthNames[month] + ' ' + year;
+  return monthNames[month] + ' ' + year;
 }
-
-// function toggleMonthYearDropdown() {
-
-// }
-
-const options = generateMonthYearList(2, 2024);
 
 function Datepicker() {
   const date = new Date();
 
-  const easyDate = {
+  const [selectedDate, setSelectedDate] = useState({
     day: date.getDate(),
     month: date.getMonth(),
     year: date.getFullYear(),
-  }
-
-  const [selectedDate, setSelectedDate] = useState(easyDate)
+  })
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { day, month, year } = selectedDate;
 
+  const options = generateMonthYearList(month, year);
+
+  function handlePrevMonth() {
+    setSelectedDate({
+      day,
+      month: month === 0 ? 11 : month - 1,
+      year: month === 0 ? year - 1 : year,
+    })
+  }
+
+  function handleNextMonth() {
+    setSelectedDate({
+      day,
+      month: month === 11 ? 0 : month + 1,
+      year: month === 11 ? year + 1 : year,
+    })
+  }
+
+  useEffect(() => {
+    console.log(selectedDate)
+  }, [selectedDate])
 
   return (
     <div className={styles.container}>
@@ -56,15 +70,15 @@ function Datepicker() {
             })}
           </div>
           <div className={styles.prevNextContainer}>
-            <button className={styles.prevNextButton}>
+            <button className={styles.prevNextButton} onClick={handlePrevMonth}>
               <FaChevronLeft />
             </button>
-            <button className={styles.prevNextButton}>
+            <button className={styles.prevNextButton} onClick={handleNextMonth} >
               <FaChevronRight />
             </button>
           </div>
-
         </div>
+        <Calendar startDate={`${month + 1}-${day}-${year}`} />
       </div>
     </div >
   )
