@@ -7,6 +7,13 @@
 }
 
 .dates {
+  all: unset;
+  padding: 8px;
+  text-align: center;
+}
+
+.activeDate {
+  all: unset;
   padding: 8px;
   text-align: center;
 }

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './Datepicker.module.css';
-import { monthNames, dayNames, generateMonthYearList } from '@/utils/date-helpers';
+import { monthNames, dayNames, generateYearList } from '@/utils/date-helpers';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Calendar from './Calendar';
@@ -27,7 +27,7 @@ function Datepicker() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { day, month, year } = selectedDate;
 
-  const options = generateMonthYearList(month, year);
+  const options = generateYearList(year);
 
   function handlePrevMonth() {
     setSelectedDate({
@@ -45,6 +45,22 @@ function Datepicker() {
     })
   }
 
+  function handleSelectYear(newYear: number) {
+    setSelectedDate({
+      day,
+      month,
+      year: newYear,
+    })
+  }
+
+  function handleSelectDate(newDay: number) {
+    setSelectedDate({
+      day: newDay,
+      month,
+      year,
+    })
+  }
+
   useEffect(() => {
     console.log(selectedDate)
   }, [selectedDate])
@@ -52,21 +68,21 @@ function Datepicker() {
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
-        <h2 className={styles.header}>Today is: </h2>
+        <h2 className={styles.header}>Selected Date is: </h2>
         <p className={styles.subheader}>{`${formatDate(day, month, year)}`}</p>
       </div>
       <div className={styles.pickerContainer}>
         <div className={styles.pickerHeader}>
           <h2>{formatDate(day, month, year)}</h2>
         </div>
-        <div className={styles.monthYearContainer}>
-          <button className={styles.monthYearDropdownButton} onClick={() => setDropdownOpen(prev => !prev)}>
+        <div className={styles.yearContainer}>
+          <button className={styles.yearDropdownButton} onClick={() => setDropdownOpen(prev => !prev)}>
             <h3>{formatMonthYear(month, year)}</h3>
             <IoMdArrowDropdown />
           </button>
-          <div className={!dropdownOpen ? styles.monthYearDropdown : `${styles.monthYearDropdown} ${styles.active}`}>
-            {options.map(({ month, year }) => {
-              return <button onClick={() => console.log(month, year)} className={styles.monthYearOption} key={`${month}--${year}`}>{month}, {year}</button>
+          <div className={!dropdownOpen ? styles.yearDropdown : `${styles.yearDropdown} ${styles.active}`}>
+            {options.map((year) => {
+              return <button onClick={() => handleSelectYear(year)} className={styles.yearOption} key={year}>{year}</button>
             })}
           </div>
           <div className={styles.prevNextContainer}>
@@ -78,7 +94,12 @@ function Datepicker() {
             </button>
           </div>
         </div>
-        <Calendar startDate={`${month + 1}-${day}-${year}`} />
+        <div className={styles.dayNames}>
+          {dayNames.map((dayName, idx) => {
+            return <h3 key={idx}>{dayName}</h3>
+          })}
+        </div>
+        <Calendar selectedDate={selectedDate} selectDay={handleSelectDate} activeDate={{ day: 5, month: 3, year: 2024 }} />
       </div>
     </div >
   )

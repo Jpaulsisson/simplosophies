@@ -21,14 +21,24 @@
   font-size: 48px;
 }
 
-.monthYearContainer {
+.dayNames {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 1fr;
+  justify-items: center;
+}
+
+.yearContainer {
   position: relative;
   margin-top: 24px;
   display: flex;
   justify-content: space-between;
 }
 
-.monthYearDropdownButton {
+.yearDropdownButton {
   all: unset;
   padding-inline: 8px;
   display: flex;
@@ -36,7 +46,7 @@
   gap: 8px;
 }
 
-.monthYearDropdown {
+.yearDropdown {
   max-height: 0;
   height: 0;
   max-width: 0;
@@ -44,23 +54,27 @@
   transition: height 500ms;
 }
 
-.monthYearDropdown.active {
+.yearDropdown.active {
   max-height: 175px;
   height: 175px;
   max-width: 150px;
   position: absolute;
   top: 25px;
+  left: 40px;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: auto;
-  overflow-y: scroll;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
   padding-left: 8px;
   padding-right: 17px;
   background-color: #111;
   transition: height 500ms;
 }
 
-.monthYearOption {
+.yearOption {
   all: unset;
   font-size: 16px;
   font-weight: 300;
