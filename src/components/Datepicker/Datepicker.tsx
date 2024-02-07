@@ -24,6 +24,7 @@ function Datepicker() {
     month: date.getMonth(),
     year: date.getFullYear(),
   })
+  const [activeDate, setActiveDate] = useState(selectedDate);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { day, month, year } = selectedDate;
 
@@ -59,6 +60,11 @@ function Datepicker() {
       month,
       year,
     })
+    setActiveDate({
+      day: newDay,
+      month,
+      year,
+    })
   }
 
   useEffect(() => {
@@ -70,6 +76,8 @@ function Datepicker() {
       <div className={styles.headerContainer}>
         <h2 className={styles.header}>Selected Date is: </h2>
         <p className={styles.subheader}>{`${formatDate(day, month, year)}`}</p>
+        <h2 className={styles.header}>Active Date is: </h2>
+        <p className={styles.subheader}>{`${formatDate(activeDate.day, activeDate.month, activeDate.year)}`}</p>
       </div>
       <div className={styles.pickerContainer}>
         <div className={styles.pickerHeader}>

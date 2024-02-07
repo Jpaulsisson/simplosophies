@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './Calendar.module.css';
 import { generateCalendarMonth } from '@/utils/date-helpers'
+import { AnimatePresence, motion } from 'framer-motion';
 
 type SelectedDate = {
   day: number,
@@ -25,13 +26,15 @@ function Calendar({ selectedDate, selectDay, activeDate }: CalendarProps) {
   }
 
   return (
-    <div className={styles.container}>
-      {calendarMonth.map((day, index) => {
-        return <button disabled={day === ''} onClick={() => selectDay(Number(day))} className={highlightActiveDate(Number(day)) ? styles.activeDate : styles.dates} key={`${day}-${index}`}>{day}</button>
-      })
+    <AnimatePresence>
+      <div className={styles.container} >
+        {calendarMonth.map((day, index) => {
+          return <motion.button initial={{ opacity: 0, x: 200 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -200, opacity: 0 }} transition={{ ease: 'easeInOut', duration: index * 0.025 }} disabled={day === ''} onClick={() => selectDay(Number(day))} className={highlightActiveDate(Number(day)) ? styles.activeDate : styles.dates} key={`${day}-${index}`}>{day}</motion.button>
+        })
 
-      }
-    </div>
+        }
+      </div>
+    </AnimatePresence>
   )
 }
 
