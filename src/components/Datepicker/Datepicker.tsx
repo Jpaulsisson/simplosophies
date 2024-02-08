@@ -2,19 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './Datepicker.module.css';
-import { monthNames, dayNames, generateYearList } from '@/utils/date-helpers';
+import { monthNames, dayNames, generateYearList, formatDate, formatMonthYear } from '@/utils/date-helpers';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Calendar from './Calendar';
-
-
-function formatDate(date: number, month: number, year: number) {
-  return monthNames[month] + ' ' + date + ', ' + year;
-}
-
-function formatMonthYear(month: number, year: number) {
-  return monthNames[month] + ' ' + year;
-}
 
 function Datepicker() {
   const date = new Date();
@@ -28,7 +19,7 @@ function Datepicker() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { day, month, year } = selectedDate;
 
-  const options = generateYearList(year);
+  const options = generateYearList(new Date().getFullYear());
 
   function handlePrevMonth() {
     setSelectedDate({
@@ -67,15 +58,11 @@ function Datepicker() {
     })
   }
 
-  useEffect(() => {
-    console.log(selectedDate)
-  }, [selectedDate])
-
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
-        <h2 className={styles.header}>Selected Date is: </h2>
-        <p className={styles.subheader}>{`${formatDate(day, month, year)}`}</p>
+        <h2 className={styles.header}>Currently Viewing: </h2>
+        <p className={styles.subheader}>{`${formatMonthYear(month, year)}`}</p>
         <h2 className={styles.header}>Active Date is: </h2>
         <p className={styles.subheader}>{`${formatDate(activeDate.day, activeDate.month, activeDate.year)}`}</p>
       </div>
@@ -107,7 +94,7 @@ function Datepicker() {
             return <h3 key={idx}>{dayName}</h3>
           })}
         </div>
-        <Calendar selectedDate={selectedDate} selectDay={handleSelectDate} activeDate={{ day: 5, month: 3, year: 2024 }} />
+        <Calendar selectedDate={selectedDate} selectDay={handleSelectDate} activeDate={activeDate} />
       </div>
     </div >
   )

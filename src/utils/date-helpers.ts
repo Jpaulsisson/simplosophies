@@ -23,6 +23,16 @@ export const dayNames = [
   'S',
 ]
 
+
+export function formatDate(date: number, month: number, year: number) {
+  return monthNames[month] + ' ' + date + ', ' + year;
+}
+
+export function formatMonthYear(month: number, year: number) {
+  return monthNames[month] + ' ' + year;
+}
+
+
 // This function generates a list of month and year combinations for a dropdown. No days.
 export function generateMonthYearList(currentMonth: number, currentYear: number) {
   // stop after 30 years of options to choose from

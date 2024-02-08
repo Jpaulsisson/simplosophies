@@ -10,10 +10,15 @@
   all: unset;
   padding: 8px;
   text-align: center;
+  aspect-ratio: 1;
 }
 
 .activeDate {
   all: unset;
   padding: 8px;
   text-align: center;
+  background-color: var(--darkAccent);
+  border-radius: 50%;
+  aspect-ratio: 1;
+  transition: all 500ms;
 }

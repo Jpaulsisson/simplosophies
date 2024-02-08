@@ -14,7 +14,7 @@ type ProgressTickerProps = {
 const iconStyles = {
   arrows: { color: "var(--darkAccent)", height: 28, width: 28 },
   offBulb: { color: '#222222', height: 12, width: 12 },
-  onBulb: { color: 'var(--primaryAccent)', height: 20, width: 20 },
+  onBulb: { color: 'var(--primaryAccent)', height: 20, width: 20, },
 }
 
 function ProgressTicker({ length, activeIdx, setActiveIdx }: ProgressTickerProps) {

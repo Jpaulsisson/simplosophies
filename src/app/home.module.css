@@ -16,3 +16,18 @@
   font-weight: 300;
   text-align: end;
 }
+
+.discoverContainer {
+  margin-top: 75px;
+  line-height: 25px;
+}
+
+.discoverHeader {
+  padding-block: 20px;
+  padding-left: 20px;
+  background: linear-gradient(180deg, var(--primaryFont) 0% 35%, var(--bgColor) 35% 52%, var(--primaryAccent) 52% 65%, var(--bgColor) 65% 100%);
+  background-size: 1px 100%;
+  background-repeat: no-repeat;
+  text-decoration: underline var(--darkAccent);
+  text-underline-offset: 5px;
+}
