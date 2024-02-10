@@ -28,3 +28,7 @@ export type MutationVariables = {
 export type DeleteMutationVar = {
   id: string;
 }
+
+export type CountryCodes = {
+  [key: string]: string;
+}

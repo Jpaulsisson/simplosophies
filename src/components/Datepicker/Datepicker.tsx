@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Datepicker.module.css';
-import { monthNames, dayNames, generateYearList, formatDate, formatMonthYear } from '@/utils/date-helpers';
+import { generateYearList, formatDate, formatMonthYear } from '@/utils/date-helpers';
+import { dayNames } from '@/utils/constants';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Calendar from './Calendar';
@@ -60,12 +61,6 @@ function Datepicker() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.headerContainer}>
-        <h2 className={styles.header}>Currently Viewing: </h2>
-        <p className={styles.subheader}>{`${formatMonthYear(month, year)}`}</p>
-        <h2 className={styles.header}>Active Date is: </h2>
-        <p className={styles.subheader}>{`${formatDate(activeDate.day, activeDate.month, activeDate.year)}`}</p>
-      </div>
       <div className={styles.pickerContainer}>
         <div className={styles.pickerHeader}>
           <h2>{formatDate(day, month, year)}</h2>
@@ -95,6 +90,10 @@ function Datepicker() {
           })}
         </div>
         <Calendar selectedDate={selectedDate} selectDay={handleSelectDate} activeDate={activeDate} />
+        <div className={styles.confirmButtonsContainer}>
+          <button className={styles.cancelButton}>Cancel</button>
+          <button className={styles.confirmButton}>OK</button>
+        </div>
       </div>
     </div >
   )

@@ -9,8 +9,15 @@
 .dates {
   all: unset;
   padding: 8px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   aspect-ratio: 1;
+}
+
+.dates:active {
+  filter: brightness(50%);
+  scale: 0.9;
 }
 
 .activeDate {
@@ -20,5 +27,4 @@
   background-color: var(--darkAccent);
   border-radius: 50%;
   aspect-ratio: 1;
-  transition: all 500ms;
 }

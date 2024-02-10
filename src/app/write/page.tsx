@@ -4,7 +4,7 @@ import React, { ChangeEvent } from 'react';
 import { useState } from 'react';
 import styles from './write.module.css';
 import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from '@/utils';
+import { firebaseConfig } from '@/utils/firebase-config';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import Spinner from '@/components/Spinner';
 import { useMutation } from '@tanstack/react-query';

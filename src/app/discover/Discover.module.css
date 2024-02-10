@@ -1,0 +1,12 @@
+.container {
+  width: 100%;
+  display: block;
+}
+
+.selectCountry {
+  width: 50%;
+  background-color: var(--bgColor);
+  padding: 16px;
+  color: var(--primaryFont);
+  border-radius: 8px;
+}

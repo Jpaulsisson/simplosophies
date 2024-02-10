@@ -1,27 +1,5 @@
-export const monthNames = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec'
-]
+import { monthNames } from "./constants";
 
-export const dayNames = [
-  'S',
-  'M',
-  'T',
-  'W',
-  'T',
-  'F',
-  'S',
-]
 
 
 export function formatDate(date: number, month: number, year: number) {
@@ -110,7 +88,7 @@ export function generateCalendarMonth(month: number, day: number, year: number) 
     dates.push(String(i));
   }
 
-  while (dates.length < 35) {
+  while (dates.length < 42) {
     dates.push('')
   }
 
