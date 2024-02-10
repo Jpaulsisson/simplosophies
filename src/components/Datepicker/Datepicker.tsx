@@ -1,53 +1,58 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from './Datepicker.module.css';
 import { generateYearList, formatDate, formatMonthYear } from '@/utils/date-helpers';
 import { dayNames } from '@/utils/constants';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Calendar from './Calendar';
+import { HolidayData } from '@/utils/types';
 
-function Datepicker() {
+type DatepickerProps = {
+  setHolidays: Dispatch<SetStateAction<HolidayData[]>>;
+};
+
+function Datepicker({ setHolidays }: DatepickerProps) {
   const date = new Date();
 
-  const [selectedDate, setSelectedDate] = useState({
+  const [currentlyViewedDate, setCurrentlyViewedDate] = useState({
     day: date.getDate(),
     month: date.getMonth(),
     year: date.getFullYear(),
-  })
-  const [activeDate, setActiveDate] = useState(selectedDate);
+  });
+  const [activeDate, setActiveDate] = useState(currentlyViewedDate);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { day, month, year } = selectedDate;
+  const { day, month, year } = currentlyViewedDate;
 
-  const options = generateYearList(new Date().getFullYear());
+  const options = generateYearList(date.getFullYear());
 
   function handlePrevMonth() {
-    setSelectedDate({
+    setCurrentlyViewedDate({
       day,
       month: month === 0 ? 11 : month - 1,
       year: month === 0 ? year - 1 : year,
     })
-  }
+  };
 
   function handleNextMonth() {
-    setSelectedDate({
+    setCurrentlyViewedDate({
       day,
       month: month === 11 ? 0 : month + 1,
       year: month === 11 ? year + 1 : year,
     })
-  }
+  };
 
   function handleSelectYear(newYear: number) {
-    setSelectedDate({
+    setCurrentlyViewedDate({
       day,
       month,
       year: newYear,
     })
-  }
+  };
 
   function handleSelectDate(newDay: number) {
-    setSelectedDate({
+    setCurrentlyViewedDate({
       day: newDay,
       month,
       year,
@@ -57,7 +62,7 @@ function Datepicker() {
       month,
       year,
     })
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -89,7 +94,7 @@ function Datepicker() {
             return <h3 key={idx}>{dayName}</h3>
           })}
         </div>
-        <Calendar selectedDate={selectedDate} selectDay={handleSelectDate} activeDate={activeDate} />
+        <Calendar currentlyViewedDate={currentlyViewedDate} selectDay={handleSelectDate} activeDate={activeDate} />
         <div className={styles.confirmButtonsContainer}>
           <button className={styles.cancelButton}>Cancel</button>
           <button className={styles.confirmButton}>OK</button>

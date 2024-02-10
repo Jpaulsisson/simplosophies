@@ -42,11 +42,11 @@ export async function deletePost(id: string): Promise<AxiosResponse<any, any>> {
 }
 
 export async function getHolidays(country: string, year: string, month: string, day: string) {
-  const response = await axios.get(`https://holidays.abstractapi.com/v1/?api_key=${holidayKey}&country=${country}&year=${year}&month=${month}&day=${day}`)
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  try {
+    const response = await axios.get(`https://holidays.abstractapi.com/v1/?api_key=${holidayKey}&country=${country}&year=${year}&month=${month}&day=${day}`)
+    console.log(response)
+  }
+  catch (error) {
+    console.log(error);
+  };
 }

@@ -15,16 +15,28 @@ const font = Urbanist({
 export default function Discover() {
 
   const [selectedCountry, setSelectedCountry] = useState<string>("United States")
-  console.log(countryCodes[selectedCountry])
+  const [holidays, setHolidays] = useState(['hi', 'there'])
 
   return (
     <div className={styles.container}>
-      <select onChange={e => setSelectedCountry(e.target.value)} className={`${font.className} ${styles.selectCountry}`} defaultValue={selectedCountry}>
-        {Object.keys(countryCodes).map((country) => {
-          return <option key={country}>{country}</option>
-        })}
-      </select>
-      <Datepicker />
+      <div className={styles.selectContainer}>
+        <select onChange={e => setSelectedCountry(e.target.value)} className={`${font.className} ${styles.selectCountry}`} defaultValue={selectedCountry}>
+          {Object.keys(countryCodes).map((country) => {
+            return <option key={country}>{country}</option>
+          })}
+        </select>
+      </div>
+      <div className={styles.pickerAndListContainer}>
+        <Datepicker setHolidays={setHolidays} />
+        <div className={styles.holidayList}>
+          {
+            holidays &&
+            holidays.map((holiday) => {
+              return <p key={holiday}>{holiday}</p>
+            })
+          }
+        </div>
+      </div>
     </div>
   )
 }

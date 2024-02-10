@@ -10,14 +10,14 @@ type SelectedDate = {
 }
 
 type CalendarProps = {
-  selectedDate: SelectedDate;
+  currentlyViewedDate: SelectedDate;
   selectDay: (newDay: number) => void;
   activeDate: SelectedDate;
 }
 
-function Calendar({ selectedDate, selectDay, activeDate }: CalendarProps) {
+function Calendar({ currentlyViewedDate, selectDay, activeDate }: CalendarProps) {
 
-  const { day, month, year } = selectedDate;
+  const { day, month, year } = currentlyViewedDate;
 
   const calendarMonth = generateCalendarMonth(month + 1, day, year);
 
@@ -31,7 +31,6 @@ function Calendar({ selectedDate, selectDay, activeDate }: CalendarProps) {
         {calendarMonth.map((day, index) => {
           return <motion.button initial={{ x: -50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ ease: 'easeInOut', duration: 0.3 }} disabled={day === ''} onClick={() => selectDay(Number(day))} className={highlightActiveDate(Number(day)) ? styles.activeDate : styles.dates} key={`${day}-${index}`}>{day}</motion.button>
         })
-
         }
       </div>
     </AnimatePresence>
