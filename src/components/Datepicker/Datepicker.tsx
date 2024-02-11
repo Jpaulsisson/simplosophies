@@ -3,17 +3,19 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from './Datepicker.module.css';
 import { generateYearList, formatDate, formatMonthYear } from '@/utils/date-helpers';
-import { dayNames } from '@/utils/constants';
+import { countryCodes, dayNames } from '@/utils/constants';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Calendar from './Calendar';
 import { HolidayData } from '@/utils/types';
+import { getHolidays } from '@/utils/api-functions';
 
 type DatepickerProps = {
   setHolidays: Dispatch<SetStateAction<HolidayData[]>>;
+  selectedCountry: string;
 };
 
-function Datepicker({ setHolidays }: DatepickerProps) {
+function Datepicker({ setHolidays, selectedCountry }: DatepickerProps) {
   const date = new Date();
 
   const [currentlyViewedDate, setCurrentlyViewedDate] = useState({
@@ -64,6 +66,12 @@ function Datepicker({ setHolidays }: DatepickerProps) {
     })
   };
 
+  async function handleGetHolidays(country: string, year: string, month: string, day: string) {
+    const holidays = await getHolidays(country, year, month, day);
+    console.log(holidays);
+    setHolidays(holidays);
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.pickerContainer}>
@@ -97,7 +105,7 @@ function Datepicker({ setHolidays }: DatepickerProps) {
         <Calendar currentlyViewedDate={currentlyViewedDate} selectDay={handleSelectDate} activeDate={activeDate} />
         <div className={styles.confirmButtonsContainer}>
           <button className={styles.cancelButton}>Cancel</button>
-          <button className={styles.confirmButton}>OK</button>
+          <button onClick={() => handleGetHolidays(countryCodes[selectedCountry], String(activeDate.year), String(activeDate.month + 1), String(activeDate.day))} className={styles.confirmButton}>OK</button>
         </div>
       </div>
     </div >

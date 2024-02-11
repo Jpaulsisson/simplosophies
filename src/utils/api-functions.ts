@@ -1,7 +1,7 @@
 import { BlogContent } from "./types"
 import axios, { AxiosResponse } from "axios"
 
-const holidayKey = process.env.HOLIDAYS_API_KEY as string;
+const holidayKey = process.env.NEXT_PUBLIC_HOLIDAYS_API_KEY as string;
 
 export async function getPosts() {
   try {
@@ -44,9 +44,10 @@ export async function deletePost(id: string): Promise<AxiosResponse<any, any>> {
 export async function getHolidays(country: string, year: string, month: string, day: string) {
   try {
     const response = await axios.get(`https://holidays.abstractapi.com/v1/?api_key=${holidayKey}&country=${country}&year=${year}&month=${month}&day=${day}`)
-    console.log(response)
+    return response.data
   }
   catch (error) {
-    console.log(error);
+    console.error(error);
+    return Promise.reject(error);
   };
 }

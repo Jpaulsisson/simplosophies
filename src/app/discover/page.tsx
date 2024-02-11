@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import styles from './Discover.module.css';
 import { countryCodes } from '@/utils/constants';
 import { Urbanist } from 'next/font/google';
+import { HolidayData } from '@/utils/types';
 
 const font = Urbanist({
   weight: ['100', '300', '400', '700'],
@@ -15,7 +16,7 @@ const font = Urbanist({
 export default function Discover() {
 
   const [selectedCountry, setSelectedCountry] = useState<string>("United States")
-  const [holidays, setHolidays] = useState(['hi', 'there'])
+  const [holidays, setHolidays] = useState<HolidayData[] | []>([])
 
   return (
     <div className={styles.container}>
@@ -27,12 +28,12 @@ export default function Discover() {
         </select>
       </div>
       <div className={styles.pickerAndListContainer}>
-        <Datepicker setHolidays={setHolidays} />
+        <Datepicker setHolidays={setHolidays} selectedCountry={selectedCountry} />
         <div className={styles.holidayList}>
           {
             holidays &&
             holidays.map((holiday) => {
-              return <p key={holiday}>{holiday}</p>
+              return <p key={holiday.name}>{holiday.name}</p>
             })
           }
         </div>
