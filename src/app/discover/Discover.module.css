@@ -17,11 +17,16 @@
 
 .pickerAndListContainer {
   display: flex;
-  gap: 25px;
+  gap: 75px;
 }
 
 .holidayList {
   color: var(--primaryFont);
-  border: 1px solid white;
   width: 100%;
+}
+
+.holidayItem {
+  font-size: 24px;
+  color: var(--primaryFont);
+  padding: 20px;
 }

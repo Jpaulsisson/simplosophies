@@ -29,14 +29,14 @@ export default function Discover() {
       </div>
       <div className={styles.pickerAndListContainer}>
         <Datepicker setHolidays={setHolidays} selectedCountry={selectedCountry} />
-        <div className={styles.holidayList}>
+        <ul className={styles.holidayList}>
           {
             holidays &&
             holidays.map((holiday) => {
-              return <p key={holiday.name}>{holiday.name}</p>
+              return <li className={styles.holidayItem} key={holiday.name}>{holiday.name}</li>
             })
           }
-        </div>
+        </ul>
       </div>
     </div>
   )
