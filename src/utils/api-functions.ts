@@ -1,7 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import { BlogContent } from "./types"
 import axios, { AxiosResponse } from "axios"
-
-const holidayKey = process.env.NEXT_PUBLIC_HOLIDAYS_API_KEY as string;
 
 export async function getPosts() {
   try {
@@ -41,13 +40,24 @@ export async function deletePost(id: string): Promise<AxiosResponse<any, any>> {
   }
 }
 
-export async function getHolidays(country: string, year: string, month: string, day: string) {
+export async function getDateInfo(month: string | number, day: string | number): Promise<AxiosResponse<any, any>> {
   try {
-    const response = await axios.get(`https://holidays.abstractapi.com/v1/?api_key=${holidayKey}&country=${country}&year=${year}&month=${month}&day=${day}`)
-    return response.data
-  }
-  catch (error) {
+    const { data } = await axios(`/api/dateInfo?month=${month}&day=${day}`);
+    console.log(data);
+    return data
+  } catch (error) {
     console.error(error);
-    return Promise.reject(error);
-  };
+    return Promise.reject(error)
+  }
+}
+
+export function useDateInfoQuery(month: string | number, day: string | number) {
+  if (typeof month === "number" && month < 10) {
+    month = `0${month}`;
+  }
+  if (typeof day === "number" && day < 10) {
+    day = `0${day}`;
+  }
+  const queryKey = ['dateInfo', month, day];
+  return useQuery({queryKey, queryFn: () => getDateInfo(month, day)})
 }

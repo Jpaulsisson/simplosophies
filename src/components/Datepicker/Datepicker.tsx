@@ -1,21 +1,15 @@
 'use client';
 
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './Datepicker.module.css';
 import { generateYearList, formatDate, formatMonthYear } from '@/utils/date-helpers';
-import { countryCodes, dayNames } from '@/utils/constants';
+import { dayNames } from '@/utils/constants';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Calendar from './Calendar';
-import { HolidayData } from '@/utils/types';
-import { getHolidays } from '@/utils/api-functions';
+import { useDateInfoQuery } from '@/utils/api-functions';
 
-type DatepickerProps = {
-  setHolidays: Dispatch<SetStateAction<HolidayData[]>>;
-  selectedCountry: string;
-};
-
-function Datepicker({ setHolidays, selectedCountry }: DatepickerProps) {
+function Datepicker() {
   const date = new Date();
 
   const [currentlyViewedDate, setCurrentlyViewedDate] = useState({
@@ -25,6 +19,12 @@ function Datepicker({ setHolidays, selectedCountry }: DatepickerProps) {
   });
   const [activeDate, setActiveDate] = useState(currentlyViewedDate);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+
+useEffect(() => {
+  console.log(activeDate);
+}, [activeDate])
+
   const { day, month, year } = currentlyViewedDate;
 
   const options = generateYearList(date.getFullYear());
@@ -53,7 +53,9 @@ function Datepicker({ setHolidays, selectedCountry }: DatepickerProps) {
     })
   };
 
-  function handleSelectDate(newDay: number) {
+  const handleDateInfoFetch = useDateInfoQuery(activeDate.month + 1, activeDate.day);
+
+  const handleSelectDate = useCallback((newDay: number) => {
     setCurrentlyViewedDate({
       day: newDay,
       month,
@@ -64,13 +66,7 @@ function Datepicker({ setHolidays, selectedCountry }: DatepickerProps) {
       month,
       year,
     })
-  };
-
-  async function handleGetHolidays(country: string, year: string, month: string, day: string) {
-    const holidays = await getHolidays(country, year, month, day);
-    console.log(holidays);
-    setHolidays(holidays);
-  }
+  }, [setActiveDate, setCurrentlyViewedDate, month, year])
 
   return (
     <div className={styles.container}>
@@ -105,7 +101,7 @@ function Datepicker({ setHolidays, selectedCountry }: DatepickerProps) {
         <Calendar currentlyViewedDate={currentlyViewedDate} selectDay={handleSelectDate} activeDate={activeDate} />
         <div className={styles.confirmButtonsContainer}>
           <button className={styles.cancelButton}>Cancel</button>
-          <button onClick={() => handleGetHolidays(countryCodes[selectedCountry], String(activeDate.year), String(activeDate.month + 1), String(activeDate.day))} className={styles.confirmButton}>OK</button>
+          <button onClick={() => handleDateInfoFetch} className={styles.confirmButton}>OK</button>
         </div>
       </div>
     </div >
