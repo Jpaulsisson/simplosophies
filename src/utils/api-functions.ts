@@ -50,14 +50,3 @@ export async function getDateInfo(month: string | number, day: string | number):
     return Promise.reject(error)
   }
 }
-
-export function useDateInfoQuery(month: string | number, day: string | number) {
-  if (typeof month === "number" && month < 10) {
-    month = `0${month}`;
-  }
-  if (typeof day === "number" && day < 10) {
-    day = `0${day}`;
-  }
-  const queryKey = ['dateInfo', month, day];
-  return useQuery({queryKey, queryFn: () => getDateInfo(month, day)})
-}

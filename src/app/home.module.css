@@ -17,12 +17,12 @@
   text-align: end;
 }
 
-.discoverContainer {
+.exploreContainer {
   margin-top: 75px;
   line-height: 25px;
 }
 
-.discoverHeader {
+.exploreHeader {
   padding-block: 20px;
   padding-left: 20px;
   background: linear-gradient(180deg, var(--primaryFont) 0% 35%, var(--bgColor) 35% 52%, var(--primaryAccent) 52% 65%, var(--bgColor) 65% 100%);

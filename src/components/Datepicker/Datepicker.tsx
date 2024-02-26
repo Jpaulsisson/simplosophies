@@ -1,15 +1,15 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import styles from './Datepicker.module.css';
 import { generateYearList, formatDate, formatMonthYear } from '@/utils/date-helpers';
 import { dayNames } from '@/utils/constants';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Calendar from './Calendar';
-import { useDateInfoQuery } from '@/utils/api-functions';
+import { getDateInfo } from '@/utils/api-functions';
 
-function Datepicker() {
+function Datepicker({ setHistoricalData }: {setHistoricalData: Dispatch<SetStateAction<object>>}) {
   const date = new Date();
 
   const [currentlyViewedDate, setCurrentlyViewedDate] = useState({
@@ -20,14 +20,21 @@ function Datepicker() {
   const [activeDate, setActiveDate] = useState(currentlyViewedDate);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-
-useEffect(() => {
-  console.log(activeDate);
-}, [activeDate])
-
   const { day, month, year } = currentlyViewedDate;
 
   const options = generateYearList(date.getFullYear());
+
+  async function handleDateInfoFetch(month: number | string, day: number | string) {
+    if (typeof month === "number" && month < 10) {
+      month = `0${month}`
+    }
+    if (typeof day === "number" && day < 10) {
+      day = `0${day}`
+    }
+    const { data } = await getDateInfo(month, day);
+    if (data) setHistoricalData(data);
+    else return;
+  }
 
   function handlePrevMonth() {
     setCurrentlyViewedDate({
@@ -52,8 +59,6 @@ useEffect(() => {
       year: newYear,
     })
   };
-
-  const handleDateInfoFetch = useDateInfoQuery(activeDate.month + 1, activeDate.day);
 
   const handleSelectDate = useCallback((newDay: number) => {
     setCurrentlyViewedDate({
@@ -100,8 +105,7 @@ useEffect(() => {
         </div>
         <Calendar currentlyViewedDate={currentlyViewedDate} selectDay={handleSelectDate} activeDate={activeDate} />
         <div className={styles.confirmButtonsContainer}>
-          <button className={styles.cancelButton}>Cancel</button>
-          <button onClick={() => handleDateInfoFetch} className={styles.confirmButton}>OK</button>
+          <button onClick={() => handleDateInfoFetch(activeDate.month, activeDate.day)} className={styles.confirmButton}>Learn</button>
         </div>
       </div>
     </div >

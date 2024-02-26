@@ -15,9 +15,10 @@
   border-radius: 8px;
 }
 
-.pickerAndListContainer {
-  display: flex;
-  gap: 75px;
+.pickerContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
 }
 
 .holidayList {
