@@ -8,8 +8,9 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Calendar from './Calendar';
 import { getDateInfo } from '@/utils/api-functions';
+import { HistoricalData } from '@/utils/types';
 
-function Datepicker({ setHistoricalData }: {setHistoricalData: Dispatch<SetStateAction<object>>}) {
+function Datepicker({ setHistoricalData }: { setHistoricalData: Dispatch<SetStateAction<HistoricalData | null | undefined>> }) {
   const date = new Date();
 
   const [currentlyViewedDate, setCurrentlyViewedDate] = useState({
@@ -33,7 +34,7 @@ function Datepicker({ setHistoricalData }: {setHistoricalData: Dispatch<SetState
     }
     const { data } = await getDateInfo(month, day);
     if (data) setHistoricalData(data);
-    else return;
+    else setHistoricalData(null);
   }
 
   function handlePrevMonth() {

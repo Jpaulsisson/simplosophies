@@ -31,3 +31,13 @@
   color: var(--primaryFont);
   padding: 20px;
 }
+
+.listItem {
+  font-size: 14px;
+  color: var(--primaryFont);
+}
+
+.listItemTitle {
+  font-size: 20px;
+  color: var(--primaryAccent);
+}

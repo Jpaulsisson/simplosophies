@@ -33,17 +33,36 @@ export type CountryCodes = {
   [key: string]: string;
 }
 
-export type HolidayData = {
-  name: string;
-  name_local: string;
-  language: string;
-  description: string;
-  country: string;
-  location: string;
-  type: string;
-  date: string;
-  date_year: string;
-  date_month: string;
-  date_day: string;
-  week_day: string;
-}
+type HistoricalDataList = {
+  text: string;
+  year: number;
+  pages: {
+    type: string;
+    namespace: object;
+    wikibase_item: string;
+    titles: object;
+    pageid: number;
+    thumbnail: object;
+    originalimage: object;
+    lang: string;
+    dir: string;
+    revision: string;
+    tid: string;
+    timestamp: string;
+    description: string;
+    description_source: string;
+    content_urls: object;
+    extract: string;
+    extract_html: string;
+  }[];
+}[];
+
+type HolidayData = Omit<HistoricalDataList[number], 'year'>[];
+
+export type HistoricalData = {
+  selected: HistoricalDataList;
+  births: HistoricalDataList;
+  deaths: HistoricalDataList;
+  events: HistoricalDataList;
+  holidays: HolidayData;
+  };
