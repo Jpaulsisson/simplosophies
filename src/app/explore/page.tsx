@@ -35,16 +35,28 @@ export default function Discover() {
       </div>
       {historicalData &&
         <div className={styles.historicalDataContainer}>
-          {/* TODO: create layout for historical data and create a type for it */}
-          <h2>Births:</h2>
-          <ul className={styles.birthsList}>
-            {historicalData.births.map((birth) => {
-              return <li key={birth.text} className={styles.listItem}>
-                <p><span className={styles.listItemTitle}>Who:</span> {birth.text}</p>
-                <p><span className={styles.listItemTitle}>When:</span> {birth.year}</p>
-              </li>
-            })}
-          </ul>
+          <div>
+            <h2>Births:</h2>
+            <ul className={styles.birthsList}>
+              {historicalData.births.map((birth) => {
+                return <li key={birth.text} className={styles.listItem}>
+                  <p><span className={styles.listItemTitle}>Who:</span> {birth.text}</p>
+                  <p><span className={styles.listItemTitle}>When:</span> {birth.year}</p>
+                </li>
+              })}
+            </ul>
+          </div>
+          <div>
+            <h2>Deaths:</h2>
+            <ul className={styles.birthsList}>
+              {historicalData.deaths.map((death) => {
+                return <li key={death.text} className={styles.listItem}>
+                  <p><span className={styles.listItemTitle}>Who:</span> {death.text}</p>
+                  <p><span className={styles.listItemTitle}>When:</span> {death.year}</p>
+                </li>
+              })}
+            </ul>
+          </div>
         </div>}
     </div>
   )
