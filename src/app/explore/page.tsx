@@ -17,6 +17,7 @@ const font = Urbanist({
 export default function Discover() {
 
   const [historicalData, setHistoricalData] = useState<HistoricalData | null | undefined>();
+  const [amount, setAmount] = useState(10);
 
   useEffect(() => {
     console.log(historicalData)
@@ -35,25 +36,45 @@ export default function Discover() {
       </div>
       {historicalData &&
         <div className={styles.historicalDataContainer}>
-          <div>
-            <h2>Births:</h2>
-            <ul className={styles.birthsList}>
-              {historicalData.births.map((birth) => {
-                return <li key={birth.text} className={styles.listItem}>
-                  <p><span className={styles.listItemTitle}>Who:</span> {birth.text}</p>
-                  <p><span className={styles.listItemTitle}>When:</span> {birth.year}</p>
-                </li>
+          <div className={styles.listContainer}>
+            <h2 className={styles.itemListHeader}>Highlights:</h2>
+            <ul className={styles.itemList}>
+              {historicalData.selected.map((item, index) => {
+                if (index < amount) {
+                  return <li key={item.text} className={styles.listItem}>
+                    <p><span className={styles.listItemTitle}>What:</span> {item.text}</p>
+                    <p><span className={styles.listItemTitle}>When:</span> {item.year}</p>
+                  </li>
+                }
+                else return null
               })}
             </ul>
           </div>
           <div>
-            <h2>Deaths:</h2>
-            <ul className={styles.birthsList}>
-              {historicalData.deaths.map((death) => {
-                return <li key={death.text} className={styles.listItem}>
-                  <p><span className={styles.listItemTitle}>Who:</span> {death.text}</p>
-                  <p><span className={styles.listItemTitle}>When:</span> {death.year}</p>
-                </li>
+            <h2 className={styles.itemListHeader}>Births:</h2>
+            <ul className={styles.itemList}>
+              {historicalData.births.map((birth, index) => {
+                if (index < amount) {
+                  return <li key={birth.text} className={styles.listItem}>
+                    <p><span className={styles.listItemTitle}>Who:</span> {birth.text}</p>
+                    <p><span className={styles.listItemTitle}>When:</span> {birth.year}</p>
+                  </li>
+                }
+                else return null
+              })}
+            </ul>
+          </div>
+          <div>
+            <h2 className={styles.itemListHeader}>Deaths:</h2>
+            <ul className={styles.itemList}>
+              {historicalData.deaths.map((death, index) => {
+                if (index < amount) {
+                  return <li key={death.text} className={styles.listItem}>
+                    <p className={styles.listInfo}><span className={styles.listItemTitle}>Who:</span> {death.text}</p>
+                    <p className={styles.listInfo}><span className={styles.listItemTitle}>When:</span> {death.year}</p>
+                  </li>
+                }
+                else return null
               })}
             </ul>
           </div>

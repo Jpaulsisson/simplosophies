@@ -24,11 +24,25 @@
 .historicalDataContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.itemListHeader {
+  margin-bottom: 20px;
+}
+
+.itemList {
+  display: grid;
+  gap: 25px;
 }
 
 .listItem {
   font-size: 14px;
   color: var(--primaryFont);
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--darkAccent);
+  padding: 8px;
 }
 
 .listItemTitle {
