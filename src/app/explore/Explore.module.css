@@ -16,15 +16,22 @@
 }
 
 .pickerContainer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 25px;
+  width: 75%;
+  margin-inline: auto;
 }
 
 .historicalDataContainer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 25px;
+  margin-top: 50px;
+}
+
+.listContainer {
+  border: 1px solid var(--primaryAccent);
+  padding: 8px;
+  flex: 1;
+  height: min-content;
 }
 
 .itemListHeader {
@@ -48,4 +55,15 @@
 .listItemTitle {
   font-size: 20px;
   color: var(--primaryAccent);
+}
+
+.seeMore {
+  all: unset;
+  padding: 4px;
+  margin-top: 12px;
+  color: var(--primaryFont);
+}
+
+.seeMore:active {
+  filter: brightness(0);
 }

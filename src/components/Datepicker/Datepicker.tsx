@@ -78,7 +78,7 @@ function Datepicker({ setHistoricalData }: { setHistoricalData: Dispatch<SetStat
     <div className={styles.container}>
       <div className={styles.pickerContainer}>
         <div className={styles.pickerHeader}>
-          <h2>{formatDate(day, month, year)}</h2>
+          <h2>{formatDate(activeDate.day, activeDate.month, activeDate.year)}</h2>
         </div>
         <div className={styles.yearContainer}>
           <button className={styles.yearDropdownButton} onClick={() => setDropdownOpen(prev => !prev)}>
