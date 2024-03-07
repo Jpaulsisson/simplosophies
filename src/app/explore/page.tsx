@@ -32,14 +32,14 @@ export default function Discover() {
               {historicalData.selected.map((item, index) => {
                 if (index < amounts.highlights) {
                   return <li key={item.text} className={styles.listItem}>
-                    <p><span className={styles.listItemTitle}>What:</span> {item.text}</p>
-                    <p><span className={styles.listItemTitle}>When:</span> {item.year}</p>
+                    <p><span className={styles.listItemTitle}>What: </span>{item.text}</p>
+                    <p><span className={styles.listItemTitle}>When: </span>{item.year}</p>
                   </li>
                 }
                 else return null
               })}
             </ul>
-            <button className={styles.seeMore} onClick={() => setAmounts((prev) => ({ ...prev, highlights: prev.highlights + 10 }))}>see more</button>
+            <button className={styles.seeMore} onClick={() => setAmounts((prev) => ({ ...prev, highlights: prev.highlights += 10 }))}>see more</button>
           </div>
           <div className={styles.listContainer}>
             <h2 className={styles.itemListHeader}>Births:</h2>
@@ -54,7 +54,7 @@ export default function Discover() {
                 else return null
               })}
             </ul>
-            <button className={styles.seeMore} onClick={() => setAmounts((prev) => ({ ...prev, highlights: prev.births + 10 }))}>see more</button>
+            <button className={styles.seeMore} onClick={() => setAmounts((prev) => ({ ...prev, highlights: prev.births += 10 }))}>see more</button>
           </div>
           <div className={styles.listContainer}>
             <h2 className={styles.itemListHeader}>Deaths:</h2>
@@ -69,7 +69,7 @@ export default function Discover() {
                 else return null
               })}
             </ul>
-            <button className={styles.seeMore} onClick={() => setAmounts((prev) => ({ ...prev, highlights: prev.deaths + 10 }))}>see more</button>
+            <button className={styles.seeMore} onClick={() => setAmounts((prev) => ({ ...prev, highlights: prev.deaths += 10 }))}>see more</button>
           </div>
           <div className={styles.listContainer}>
             <h2 className={styles.itemListHeader}>Historic Events:</h2>
@@ -84,7 +84,7 @@ export default function Discover() {
                 else return null
               })}
             </ul>
-            <button className={styles.seeMore} onClick={() => setAmounts((prev) => ({ ...prev, highlights: prev.historicEvents + 10 }))}>see more</button>
+            <button className={styles.seeMore} onClick={() => setAmounts((prev) => ({ ...prev, highlights: prev.historicEvents += 10 }))}>see more</button>
           </div>
           <div className={styles.listContainer}>
             <h2 className={styles.itemListHeader}>Holidays:</h2>
@@ -98,7 +98,7 @@ export default function Discover() {
                 else return null
               })}
             </ul>
-            <button className={styles.seeMore} onClick={() => setAmounts((prev) => ({ ...prev, highlights: prev.holidays + 10 }))}>see more</button>
+            <button className={styles.seeMore} onClick={() => setAmounts((prev) => ({ ...prev, highlights: prev.holidays += 10 }))}>see more</button>
           </div>
         </div>}
     </div>
