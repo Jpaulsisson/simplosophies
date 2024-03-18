@@ -8,7 +8,7 @@ export async function getPosts() {
     const posts = data.posts;
     return posts
   } catch (error) {
-    console.error(error)
+    return Promise.reject(error);
   }
 }
 
@@ -22,7 +22,6 @@ export async function addPost(formData: BlogContent, userId: string) {
           { Accept: 'application/json' }
       }
     );
-    console.log(response);
     return response
   } catch (error) {
     return Promise.reject(error)
@@ -32,10 +31,8 @@ export async function addPost(formData: BlogContent, userId: string) {
 export async function deletePost(id: string): Promise<AxiosResponse<any, any>> {
   try {
     const response = await axios.delete(`/api/posts/deletePost?postId=${id}`)
-    console.log(response)
     return response;
   } catch (error) {
-    console.error(error);
     return Promise.reject(error)
   }
 }
